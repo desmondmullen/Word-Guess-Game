@@ -64,8 +64,7 @@ while (theGuessesRemaining > 0) {
     }
 }
 if (theGuessesRemaining == 0) {
-    console.log("You ran out of guesses.");
-    theFinalMessage = ("The correct answer was '" + theWordToGuess.split("").join(" ") + "'. Reload this page to play again!")
+    theFinalMessage = ("You ran out of guesses. The correct answer was '" + theWordToGuess.split("").join(" ") + "'. Reload this page to play again!")
     alert(theFinalMessage);
 }
 console.log(theLettersGuessedArray.join(", "));
