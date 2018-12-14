@@ -14,6 +14,7 @@ let theWordToGuessArray = [];
 let theLettersThatMatchArray = [];
 let randomMax = allWordsToGuess.length - 1 //minus 1 to make it zero-based
 let randomMin = 0
+let theFinalMessage = ""
 
 // pick the word based on a random number
 let theWordToGuess = allWordsToGuess[Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin];
@@ -27,7 +28,7 @@ console.log(theWordToGuess);
 console.log(theLettersThatMatchArray.join(" "));
 
 while (theGuessesRemaining > 0) {
-    theGuess = (prompt("enter a letter to see if it's part of the word"));
+    theGuess = (prompt("Fill in the blanks to guess this " + theWordToGuess.length + " letter name: " + theLettersThatMatchArray.join(" ") + "\nYou have guessed these letters so far: " + theLettersGuessedArray.join(", ") + "\nYou have " + theGuessesRemaining + " guesses left. (Correct guesses don't count against you.)\nEnter your guess here and press [return]"));
     // if it is not a letter then we will do nothing (maybe beep?)
     if (!allTheValidGuesses.includes(theGuess) || theGuess.length !== 1) {
         // beep or something?
@@ -50,7 +51,8 @@ while (theGuessesRemaining > 0) {
             }
             // then see if the word has been completed
             if (!theLettersThatMatchArray.includes("_")) {
-                alert("You won!");
+                theFinalMessage = ("You won! You guessed '" + theLettersThatMatchArray.join("") + "'. Reload this page to play again!");
+                alert(theFinalMessage);
                 break;
             }
             console.log(theLettersThatMatchArray.join(" "));
@@ -63,6 +65,8 @@ while (theGuessesRemaining > 0) {
 }
 if (theGuessesRemaining == 0) {
     console.log("You ran out of guesses.");
+    theFinalMessage = ("The correct answer was '" + theWordToGuess.split("").join(" ") + "'. Reload this page to play again!")
+    alert(theFinalMessage);
 }
 console.log(theLettersGuessedArray.join(", "));
-document.write(theLettersThatMatchArray.join(" ") + " / your letters guessed: " + theLettersGuessedArray.join(", "));
+document.write(theFinalMessage);
