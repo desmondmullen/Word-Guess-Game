@@ -1,4 +1,15 @@
-const allWordsReset = ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"]; //1918-1919 top-five baby girl and top-five baby boy names
+const allWordsReset = [
+    ["Mary", 1],
+    ["Helen", 2],
+    ["Dorothy", 3],
+    ["Margaret", 4],
+    ["Ruth", 5],
+    ["John", 1],
+    ["William", 2],
+    ["James", 3],
+    ["Robert", 4],
+    ["Charles", 5]
+]; //1918-1919 top-five baby girl and top-five baby boy names
 var allWordsToGuess = allWordsReset;
 var theWordToGuess = "";
 const allTheValidGuesses = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -7,11 +18,13 @@ let theGuessesRemaining = 0;
 let theLettersGuessedArray = [];
 let theWordToGuessArray = [];
 let theLettersThatMatchArray = [];
-let randomMax = allWordsToGuess.length - 1 //minus 1 to make it zero-based
+let randomMax = allWordsToGuess.length - 1; //minus 1 to make it zero-based
 let randomMin = 0;
 let theMessage = "";
 let theKeyName = "";
 let theWordsGuessedArray = [];
+let theWordToGuessPosition = ""
+
 
 
 window.onload = function windowLoad() {
@@ -20,7 +33,6 @@ window.onload = function windowLoad() {
 
 document.addEventListener("keypress", (event) => {
     theKeyName = event.key;
-    // console.log("'" + event.key + "'");
     if (event.key === "Enter") {
         playAgain();
     } else {
@@ -51,15 +63,23 @@ function updateAllDisplays() {
     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "));
     updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
     updateDisplay("theWordsGuessed", "Names guessed: " + theWordsGuessedArray.join(", "));
+    updateDisplay("theTopFiveGirlNames", "Top Five Girl Names: " + theWordsGuessedArray.join(", "));
+    updateDisplay("theTopFiveBoyNames", "Top Five Boy Names:");
 }
 
 function playGame() {
     updateAllDisplays();
     // pick the word based on a random number
-    theWordToGuess = allWordsToGuess[Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin];
+    theRandomNumber = Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin;
+    theWordToGuess = allWordsToGuess[theRandomNumber][0];
+    theWordToGuessPosition = allWordsToGuess[theRandomNumber][1];
+    // remove that word from our master list so it won't be repeated if someone plays again
+    allWordsToGuess.splice(theRandomNumber, 1);
+    randomMax = allWordsToGuess.length - 1;
     theGuessesRemaining = theWordToGuess.length + 2;
+    updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
     // put the word into an array
-    theWordToGuessArray = theWordToGuess.split("")
+    theWordToGuessArray = theWordToGuess.split("");
     for (var count = 0; count < theWordToGuess.length; count++) {
         theLettersThatMatchArray.push("_");
     }
