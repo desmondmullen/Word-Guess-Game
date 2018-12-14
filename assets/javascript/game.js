@@ -1,35 +1,62 @@
-// user: press key to start(listen for key)
-// loop this:
-//     comp: check that key is a letter.If no do nothing, else:
-//           check if key is in solution.If yes, tick sound and display in solution section, else check if letter has already been typed.If so, beep, else tick sound and display in letters guessed section.
-//     comp: check to see if solution has been completed, check to see if guessed letters has reached limit.Act accordingly if either of those happens.
-
 const allWordsReset = ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"]; //1918-1919 top-five baby girl and top-five baby boy names
 var allWordsToGuess = allWordsReset;
+var theWordToGuess = "";
 const allTheValidGuesses = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let theWins = 0;
 let theGuessesRemaining = 0;
 let theLettersGuessedArray = [];
-let theGuess = "";
 let theWordToGuessArray = [];
 let theLettersThatMatchArray = [];
 let randomMax = allWordsToGuess.length - 1 //minus 1 to make it zero-based
-let randomMin = 0
-let theMessage = ""
+let randomMin = 0;
+let theMessage = "";
+let theKeyName = "";
+let theWordsGuessedArray = [];
 
-function resetGame() {
+
+window.onload = function windowLoad() {
+    resetGame();
+};
+
+document.addEventListener("keypress", (event) => {
+    theKeyName = event.key;
+    // console.log("'" + event.key + "'");
+    if (event.key === "Enter") {
+        playAgain();
+    } else {
+        respondToKeyPress();
+    }
+});
+
+function resetGame() { // full reset
     allWordsToGuess = allWordsReset;
     theWins = 0;
+    theWordsGuessedArray = [];
+    playAgain();
+}
+
+function playAgain() { // partial reset
+    theLettersThatMatchArray = [];
+    theLettersGuessedArray = [];
     playGame();
 }
 
-function playAgain() {
-    playGame();
+function updateDisplay(theID, theMessage) {
+    document.getElementById(theID).innerHTML = theMessage;
+}
+
+function updateAllDisplays() {
+    updateDisplay("displayArea", "");
+    updateDisplay("theWins", "Games won: " + theWins);
+    updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "));
+    updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
+    updateDisplay("theWordsGuessed", "Names guessed: " + theWordsGuessedArray.join(", "));
 }
 
 function playGame() {
+    updateAllDisplays();
     // pick the word based on a random number
-    let theWordToGuess = allWordsToGuess[Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin];
+    theWordToGuess = allWordsToGuess[Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin];
     theGuessesRemaining = theWordToGuess.length + 2;
     // put the word into an array
     theWordToGuessArray = theWordToGuess.split("")
@@ -37,43 +64,41 @@ function playGame() {
         theLettersThatMatchArray.push("_");
     }
     console.log(theWordToGuess);
-    console.log(theLettersThatMatchArray.join(" "));
+    updateDisplay("displayArea", theLettersThatMatchArray.join(" "));
+}
 
-    while (theGuessesRemaining > 0) {
-        theGuess = (prompt("Fill in the blanks to guess this " + theWordToGuess.length + " letter name: " + theLettersThatMatchArray.join(" ") + "\nYou have guessed these letters so far: " + theLettersGuessedArray.join(", ") + "\nYou have " + theGuessesRemaining + " guesses left. (Correct guesses don't count against you.)\nEnter your guess here and press [return]"));
-        if (theGuess == null) {
-            theMessage = "Reload this page to play again!";
-            document.getElementById("displayArea").innerHTML = theMessage;
-            break;
-        }
-
+function respondToKeyPress() {
+    if (theGuessesRemaining > 0) {
         // if it is not a letter then we will do nothing (maybe beep?)
-        if (!allTheValidGuesses.includes(theGuess) || theGuess.length !== 1) {} else {
-            theLettersGuessedArray.push(theGuess);
-            if (theWordToGuess.toLowerCase().includes(theGuess.toLowerCase())) {
+        if (!allTheValidGuesses.includes(theKeyName) || theKeyName.length !== 1) {} else {
+
+            theLettersGuessedArray.push(theKeyName);
+            updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "))
+            if (theWordToGuess.toLowerCase().includes(theKeyName.toLowerCase())) {
                 // redo the display
                 for (i = 0; i < theWordToGuess.length; i++) {
-                    // if theGuess is in theWordToGuessArray position[i] then splice
-                    if (theWordToGuessArray[i].toLowerCase() == theGuess.toLowerCase()) {
+                    // if theKeyName is in theWordToGuessArray position[i] then splice
+                    if (theWordToGuessArray[i].toLowerCase() == theKeyName.toLowerCase()) {
                         //check if the letter in theWordToGuessArray is capital and capitalize the spice if so
-                        if (theWordToGuessArray[i] === theGuess.toLowerCase()) {
-                            theLettersThatMatchArray.splice(i, 1, theGuess.toLowerCase());
+                        if (theWordToGuessArray[i] === theKeyName.toLowerCase()) {
+                            theLettersThatMatchArray.splice(i, 1, theKeyName.toLowerCase());
                         } else {
-                            theLettersThatMatchArray.splice(i, 1, theGuess.toUpperCase());
+                            theLettersThatMatchArray.splice(i, 1, theKeyName.toUpperCase());
                         }
+                        updateDisplay("displayArea", theLettersThatMatchArray.join(" "));
                     }
                 }
                 // then see if the word has been completed
                 if (!theLettersThatMatchArray.includes("_")) {
                     theWins = theWins + 1;
+                    updateDisplay("displayArea", theLettersThatMatchArray.join(" "));
+                    theWordsGuessedArray.push(theWordToGuess);
                     theMessage = ("You won! You guessed '" + theLettersThatMatchArray.join("") + "'.\nYou have won " + theWins + " games so far.");
-                    alert(theMessage);
+                    // alert(theMessage);
                     document.getElementById("displayArea").innerHTML = theMessage;
                     theMessage = "Games won: " + theWins;
                     document.getElementById("theWins").innerHTML = theMessage;
-                    break;
                 }
-                console.log(theLettersThatMatchArray.join(" "));
                 //if the guess is wrong the we decrement the guesses remaining
             } else {
                 theGuessesRemaining = theGuessesRemaining - 1;
@@ -83,12 +108,11 @@ function playGame() {
         }
     }
     if (theGuessesRemaining == 0) {
+        theWordsGuessedArray.push(theWordToGuess);
         theMessage = ("You ran out of guesses. The correct answer was '" + theWordToGuess.split("").join(" ") + "'.\nYou have won " + theWins + " games so far.")
-        alert(theMessage);
+            // alert(theMessage);
         document.getElementById("displayArea").innerHTML = theMessage;
         theMessage = "Games won: " + theWins;
         document.getElementById("theWins").innerHTML = theMessage;
     }
-    console.log(theLettersGuessedArray.join(", "));
-    document.getElementById("displayArea").innerHTML = theMessage;
 }

@@ -1,0 +1,22 @@
+body {
+    font-size: x-large;
+}
+
+section {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.displayArea {
+    font-weight: bold;
+    font-size: xx-large;
+    padding: 20px;
+}
+
+.centered {
+    text-align: center;
+}
+
+.italic {
+    font-style: italic;
+}
