@@ -5,9 +5,40 @@
     <title>Word Guess Game</title>
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+    <style>
+        body {
+            font-size: x-large;
+        }
+    </style>
+    <script src="assets/javascript/game.js"></script>
 </head>
 
+<!-- 
+user: press key to start (listen for key)
+comp: pick random word from array
+      display number of underscores for word
+loop this:
+      user: presses key (listen)
+      comp: check that key is a letter. If no do nothing, else:
+          check if key is in solution. If yes, tick sound and display in solution section, else check if letter has already been typed. If so, beep, else tick sound and display in letters guessed section.
+      comp: check to see if solution has been completed, check to see if guessed letters has reached limit. Act accordingly if either of those happens.
+ -->
+
 <body>
+    <section class="pressanykey">
+        Press any key to get started!
+    </section>
+    <section class="winscount">
+        Wins:
+    </section>
+    <section class="guessesremaining">
+        Number of Guesses Remaining:
+    </section>
+    <section class="lettersguessed">
+        Letters Already Guessed:
+    </section>
+
 
 
 </body>
