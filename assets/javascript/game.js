@@ -29,6 +29,11 @@ console.log(theLettersThatMatchArray.join(" "));
 
 while (theGuessesRemaining > 0) {
     theGuess = (prompt("Fill in the blanks to guess this " + theWordToGuess.length + " letter name: " + theLettersThatMatchArray.join(" ") + "\nYou have guessed these letters so far: " + theLettersGuessedArray.join(", ") + "\nYou have " + theGuessesRemaining + " guesses left. (Correct guesses don't count against you.)\nEnter your guess here and press [return]"));
+    if (theGuess == null) {
+        document.write("Reload this page to play again!")
+        break;
+    }
+
     // if it is not a letter then we will do nothing (maybe beep?)
     if (!allTheValidGuesses.includes(theGuess) || theGuess.length !== 1) {
         // beep or something?
