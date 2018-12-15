@@ -10,11 +10,12 @@
 </head>
 
 <body>
-    <button onclick="resetGame()">Reset Game</button><br>
-    <button onclick="playAgain()">Play Again</button>
+    <h1 class="centered" id="theHeadline"></h1>
     <br>
-    <h1 class="centered">Guess the Top Ten Baby Names of 100 years ago!</h1>
+    <br>
     <section id="displayArea" class="displayArea centered"></section>
+    <br>
+    <br>
     <br>
     <section id="theWins"></section>
     <br>
@@ -22,13 +23,16 @@
     <br>
     <section id="theGuessesRemaining"></section>
     <br>
-    <section id="theWordsGuessed"></section>
+    <!-- <section id="theWordsGuessed"></section>
+    <br> -->
+    <section class="contentCentered">
+        <section class="halfWidth" id="theTopFiveGirlNames"></section>
+        <section class="halfWidth" id="theTopFiveBoyNames"></section>
+    </section>
     <br>
-    <section id="theTopFiveGirlNames"></section>
-    <br>
-    <section id="theTopFiveBoyNames"></section>
-    <br>
-    <br>
+    <section class="centered">
+        <button onclick="resetGame()">Reset Game</button><button onclick="playAgain()">Play Again</button>
+    </section>
     <br>
     <section class="centered italic">Click [Reset Game] to start over, or press [Enter] (or click [Play Again]) to try to guess all of the top ten!</section>
 

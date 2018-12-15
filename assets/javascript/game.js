@@ -1,4 +1,19 @@
-const allWordsReset = ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"]; //1918-1919 top-five baby girl and top-five baby boy names
+// const allWordsReset = ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"]; //1918-1919 top-five baby girl and top-five baby boy names
+
+// const allWordsReset = ["Lisa", "Michelle", "Kimberly", "Jennifer", "Melissa", "Michael", "David", "John", "James", "Robert"]; //1968 top-five
+const fiftyAndHundred = [
+    ["Lisa", "Michelle", "Kimberly", "Jennifer", "Melissa", "Michael", "David", "John", "James", "Robert"],
+    ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"]
+];
+let theYear = prompt("Please enter 0 for 1968 or 1 for 1918");
+let theYearDisplay = 0
+if (theYear == 0) {
+    theYearDisplay = 1968;
+} else {
+    theYearDisplay = 1918;
+}
+const allWordsReset = [...fiftyAndHundred[theYear]];
+
 const allWordsToGuess = [...allWordsReset];
 var theWordToGuess = "";
 const allTheValidGuesses = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -47,20 +62,20 @@ function updateDisplay(theID, theMessage) {
 }
 
 function updateAllDisplays() {
+    updateDisplay("theHeadline", "Guess the Top Ten Baby Names of " + theYearDisplay + "!");
     updateDisplay("displayArea", "&nbsp;");
     updateDisplay("theWins", "Games won: " + theWins);
     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "));
     updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
     // the following field plus theTopFiveGirlNames/BoyNames should be "localized" as needed for different games
-    updateDisplay("theWordsGuessed", "Names guessed: " + theWordsGuessedArray.join(", "));
-    // updateDisplay("theTopFiveGirlNames", "Top Five Girl Names<br>" + theTopFiveGirlNamesArray.join("<br> "));
+    // updateDisplay("theWordsGuessed", "Names guessed: " + theWordsGuessedArray.join(", "));
     updateTopFiveDisplays()
 }
 
 function updateTopFiveDisplays() {
     theIndex = (allWordsReset.indexOf(theWordToGuess));
     console.log(theIndex);
-    // if ((theIndex <= 4) && (theIndex !== -1)) {
+    // if ((theIndex <= 4) && (theIndex !== -1)) { // there's some annoying thing in here where girl 5 shows "0:"
     if (theIndex <= 4) {
         theTopFiveGirlNamesArray.splice(theIndex, 1, (theIndex + 1) + ": " + theWordToGuess);
     } else {
@@ -70,7 +85,6 @@ function updateTopFiveDisplays() {
     updateDisplay("theTopFiveBoyNames", "Top Five Boy Names<br><ul><li>" + theTopFiveBoyNamesArray.join("</li><li>") + "</li></ul>");
 }
 
-// make girls and boys names guessed go into list in order
 // make some "ta-da" when all ten names are guessed
 // ? make it so you can do names from any year as sourced from Social Security's top-five per gender for the last 100 years
 

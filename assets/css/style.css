@@ -1,8 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-size: x-large;
 }
 
 h1 {
+    color: blue;
     font-size: xx-large;
     font-weight: bold;
 }
@@ -17,6 +22,11 @@ ul {
     list-style-position: inside;
 }
 
+button {
+    padding: 10px;
+    margin: 20px;
+}
+
 .displayArea {
     font-weight: bold;
     font-size: xx-large;
@@ -29,4 +39,15 @@ ul {
 
 .italic {
     font-style: italic;
+}
+
+.halfWidth {
+    background-color: lightgray;
+    padding: 0;
+    width: 40%;
+}
+
+.contentCentered {
+    width: 50%;
+    display: flex;
 }
