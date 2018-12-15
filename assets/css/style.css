@@ -27,6 +27,10 @@ button {
     margin: 20px;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .displayArea {
     font-weight: bold;
     font-size: xx-large;

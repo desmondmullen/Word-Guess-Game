@@ -1,6 +1,18 @@
-// const allWordsReset = ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"]; //1918-1919 top-five baby girl and top-five baby boy names
+// 3. ** HARD MODE:** Organize your game code as an object, except for the key events to get the letter guessed.This will be a challenge if you haven't coded with JavaScript before, but we encourage anyone already familiar with the language to try this out.
+// 4. Save your whole game and its properties in an object.
+// 5. Save any of your game's functions as methods, and call them underneath your object declaration using event listeners.
+// 6. Don't forget to place your global variables and functions above your object.
+//     * Remember: global variables, then objects, then calls.
 
-// const allWordsReset = ["Lisa", "Michelle", "Kimberly", "Jennifer", "Melissa", "Michael", "David", "John", "James", "Robert"]; //1968 top-five
+// get keyboard to show on mobile
+// fix the zero in the last row of Girl names
+// fix the reset button
+// declare variables within a function?
+// there may be some game count and other scoring anomalies - need to not accept key inputs when game not active
+// make some "ta-da" when all ten names are guessed
+// make it so you can do names from any year as sourced from Social Security's top-five per gender for the last 100 years
+// play sounds
+
 const fiftyAndHundred = [
     ["Lisa", "Michelle", "Kimberly", "Jennifer", "Melissa", "Michael", "David", "John", "James", "Robert"],
     ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"]
@@ -85,14 +97,11 @@ function updateTopFiveDisplays() {
     updateDisplay("theTopFiveBoyNames", "Top Five Boy Names<br><ul><li>" + theTopFiveBoyNamesArray.join("</li><li>") + "</li></ul>");
 }
 
-// make some "ta-da" when all ten names are guessed
-// ? make it so you can do names from any year as sourced from Social Security's top-five per gender for the last 100 years
-
-
 function playGame() {
     updateAllDisplays();
     if (allWordsToGuess.length === 0) {
-        // woo-hoo, you guessed all 10! (this should be figured out elsewhere)
+        // woo-hoo, you guessed all 10! (this needs to be cleaned up)
+        updateDisplay("displayArea", "Woo-hoo! These are the top ten baby names of " + theYearDisplay + "!");
     } else {
         // pick the word based on a random number
         theRandomNumber = Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin;
