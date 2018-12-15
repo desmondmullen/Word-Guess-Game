@@ -12,6 +12,11 @@ section {
     margin: 0 auto;
 }
 
+ul {
+    margin-left: 40px;
+    list-style-position: inside;
+}
+
 .displayArea {
     font-weight: bold;
     font-size: xx-large;

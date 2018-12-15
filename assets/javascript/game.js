@@ -12,6 +12,9 @@ let randomMin = 0;
 let theMessage = "";
 let theKeyName = "";
 let theWordsGuessedArray = [];
+let theTopFiveGirlNamesArray = ["1: ", "2: ", "3: ", "4: ", "5: "];
+let theTopFiveBoyNamesArray = ["1: ", "2: ", "3: ", "4: ", "5: "];
+let theIndex = 0;
 
 window.onload = function windowLoad() {
     resetGame();
@@ -27,7 +30,7 @@ document.addEventListener("keypress", (event) => {
 });
 
 function resetGame() { // full reset
-    allWordsToGuess = [...allWordsReset];
+    const allWordsToGuess = [...allWordsReset];
     theWins = 0;
     theWordsGuessedArray = [];
     playAgain();
@@ -44,20 +47,27 @@ function updateDisplay(theID, theMessage) {
 }
 
 function updateAllDisplays() {
-    updateDisplay("displayArea", "");
+    updateDisplay("displayArea", "&nbsp;");
     updateDisplay("theWins", "Games won: " + theWins);
     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "));
     updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
-    // the following three fields should be "localized" as needed for different games
+    // the following field plus theTopFiveGirlNames/BoyNames should be "localized" as needed for different games
     updateDisplay("theWordsGuessed", "Names guessed: " + theWordsGuessedArray.join(", "));
-    updateDisplay("theTopFiveGirlNames", "Top Five Girl Names: " + theWordsGuessedArray.join(", ")); //
-    updateDisplay("theTopFiveBoyNames", "Top Five Boy Names:");
+    // updateDisplay("theTopFiveGirlNames", "Top Five Girl Names<br>" + theTopFiveGirlNamesArray.join("<br> "));
+    updateTopFiveDisplays()
 }
 
 function updateTopFiveDisplays() {
-    console.log(allWordsReset);
-    updateDisplay("theTopFiveGirlNames", "Top Five Girl Names: " + (allWordsReset.indexOf(theWordToGuess) + 1) + ": " + theWordToGuess); //
-    updateDisplay("theTopFiveBoyNames", "Top Five Boy Names:");
+    theIndex = (allWordsReset.indexOf(theWordToGuess));
+    console.log(theIndex);
+    // if ((theIndex <= 4) && (theIndex !== -1)) {
+    if (theIndex <= 4) {
+        theTopFiveGirlNamesArray.splice(theIndex, 1, (theIndex + 1) + ": " + theWordToGuess);
+    } else {
+        theTopFiveBoyNamesArray.splice(theIndex - 5, 1, (theIndex - 4) + ": " + theWordToGuess);
+    }
+    updateDisplay("theTopFiveGirlNames", "Top Five Girl Names<br><ul><li>" + theTopFiveGirlNamesArray.join("</li><li>") + "</li></ul>");
+    updateDisplay("theTopFiveBoyNames", "Top Five Boy Names<br><ul><li>" + theTopFiveBoyNamesArray.join("</li><li>") + "</li></ul>");
 }
 
 // make girls and boys names guessed go into list in order
