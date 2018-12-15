@@ -62,10 +62,16 @@ function updateAllDisplays() {
     updateDisplay("theWins", "Games won: " + theWins);
     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "));
     updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
+    // the following three fields should be "localized" as needed for different games
     updateDisplay("theWordsGuessed", "Names guessed: " + theWordsGuessedArray.join(", "));
-    updateDisplay("theTopFiveGirlNames", "Top Five Girl Names: " + theWordsGuessedArray.join(", "));
+    updateDisplay("theTopFiveGirlNames", "Top Five Girl Names: " + theWordsGuessedArray.join(", ")); //
     updateDisplay("theTopFiveBoyNames", "Top Five Boy Names:");
 }
+
+// make girls and boys names guessed go into list in order
+// make some "ta-da" when all ten names are guessed
+// ? make it so you can do names from any year as sourced from Social Security's top-five per gender for the last 100 years
+
 
 function playGame() {
     updateAllDisplays();
