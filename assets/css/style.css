@@ -42,9 +42,16 @@ button {
 }
 
 .halfWidth {
-    background-color: lightgray;
     padding: 0;
     width: 40%;
+}
+
+.halfWidth.girl {
+    background-color: lightpink;
+}
+
+.halfWidth.boy {
+    background-color: lightblue;
 }
 
 .contentCentered {
