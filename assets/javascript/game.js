@@ -1,16 +1,5 @@
-const allWordsReset = [
-    ["Mary", 1],
-    ["Helen", 2],
-    ["Dorothy", 3],
-    ["Margaret", 4],
-    ["Ruth", 5],
-    ["John", 1],
-    ["William", 2],
-    ["James", 3],
-    ["Robert", 4],
-    ["Charles", 5]
-]; //1918-1919 top-five baby girl and top-five baby boy names
-var allWordsToGuess = allWordsReset;
+const allWordsReset = ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"]; //1918-1919 top-five baby girl and top-five baby boy names
+const allWordsToGuess = [...allWordsReset];
 var theWordToGuess = "";
 const allTheValidGuesses = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let theWins = 0;
@@ -23,9 +12,6 @@ let randomMin = 0;
 let theMessage = "";
 let theKeyName = "";
 let theWordsGuessedArray = [];
-let theWordToGuessPosition = ""
-
-
 
 window.onload = function windowLoad() {
     resetGame();
@@ -41,7 +27,7 @@ document.addEventListener("keypress", (event) => {
 });
 
 function resetGame() { // full reset
-    allWordsToGuess = allWordsReset;
+    allWordsToGuess = [...allWordsReset];
     theWins = 0;
     theWordsGuessedArray = [];
     playAgain();
@@ -68,6 +54,12 @@ function updateAllDisplays() {
     updateDisplay("theTopFiveBoyNames", "Top Five Boy Names:");
 }
 
+function updateTopFiveDisplays() {
+    console.log(allWordsReset);
+    updateDisplay("theTopFiveGirlNames", "Top Five Girl Names: " + (allWordsReset.indexOf(theWordToGuess) + 1) + ": " + theWordToGuess); //
+    updateDisplay("theTopFiveBoyNames", "Top Five Boy Names:");
+}
+
 // make girls and boys names guessed go into list in order
 // make some "ta-da" when all ten names are guessed
 // ? make it so you can do names from any year as sourced from Social Security's top-five per gender for the last 100 years
@@ -75,22 +67,26 @@ function updateAllDisplays() {
 
 function playGame() {
     updateAllDisplays();
-    // pick the word based on a random number
-    theRandomNumber = Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin;
-    theWordToGuess = allWordsToGuess[theRandomNumber][0];
-    theWordToGuessPosition = allWordsToGuess[theRandomNumber][1];
-    // remove that word from our master list so it won't be repeated if someone plays again
-    allWordsToGuess.splice(theRandomNumber, 1);
-    randomMax = allWordsToGuess.length - 1;
-    theGuessesRemaining = theWordToGuess.length + 2;
-    updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
-    // put the word into an array
-    theWordToGuessArray = theWordToGuess.split("");
-    for (var count = 0; count < theWordToGuess.length; count++) {
-        theLettersThatMatchArray.push("_");
+    if (allWordsToGuess.length === 0) {
+        // woo-hoo, you guessed all 10! (this should be figured out elsewhere)
+    } else {
+        // pick the word based on a random number
+        theRandomNumber = Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin;
+        theWordToGuess = allWordsToGuess[theRandomNumber];
+        // console.log(theWordToGuess + " / random: " + theRandomNumber + " / randomMax: " + randomMax + " / allWords length: " + allWordsToGuess.length);
+        // remove that word from our master list so it won't be repeated if someone plays again
+        allWordsToGuess.splice(theRandomNumber, 1);
+        randomMax = (allWordsToGuess.length - 1);
+        theGuessesRemaining = theWordToGuess.length + 2;
+        updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
+        // put the word into an array
+        theWordToGuessArray = theWordToGuess.split("");
+        for (var count = 0; count < theWordToGuess.length; count++) {
+            theLettersThatMatchArray.push("_");
+        }
+        console.log(theWordToGuess);
+        updateDisplay("displayArea", theLettersThatMatchArray.join(" "));
     }
-    console.log(theWordToGuess);
-    updateDisplay("displayArea", theLettersThatMatchArray.join(" "));
 }
 
 function respondToKeyPress() {
@@ -124,6 +120,7 @@ function respondToKeyPress() {
                     document.getElementById("displayArea").innerHTML = theMessage;
                     theMessage = "Games won: " + theWins;
                     document.getElementById("theWins").innerHTML = theMessage;
+                    updateTopFiveDisplays()
                 }
                 //if the guess is wrong the we decrement the guesses remaining
             } else {
@@ -140,5 +137,6 @@ function respondToKeyPress() {
         document.getElementById("displayArea").innerHTML = theMessage;
         theMessage = "Games won: " + theWins;
         document.getElementById("theWins").innerHTML = theMessage;
+        updateTopFiveDisplays()
     }
 }
