@@ -47,8 +47,17 @@ window.onload = function windowLoad() {
 
 document.addEventListener("keypress", (event) => {
     theKeyName = event.key;
+
+    // // dummy element
+    // var dummyEl = document.getElementById('playAgain');
+
+    // // check for focus
+    // var isFocused = (document.activeElement !== document.getElementById('playAgain'));
+
     if (event.key === "Enter") {
-        playAgain();
+        if (document.activeElement !== document.getElementById('playAgain')) {
+            playAgain();
+        }
     } else {
         if (theGameIsActive) {
             respondToKeyPress();
