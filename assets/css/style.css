@@ -31,7 +31,8 @@ button {
 }
 
 .hidden {
-    display: none;
+    position: absolute;
+    top: -500px;
 }
 
 .displayArea {
