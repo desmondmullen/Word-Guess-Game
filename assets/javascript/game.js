@@ -71,6 +71,8 @@ function resetGame() { // full reset
 }
 
 function playAgain() { // partial reset
+    document.getElementById("playAgain").blur();
+    document.getElementById("hiddenTextField").focus();
     theLettersThatMatchArray = [];
     theLettersGuessedArray = [];
     playGame();
@@ -106,6 +108,7 @@ function updateTopFiveDisplays() {
 
 function playGame() {
     theGameIsActive = true;
+    document.getElementById("hiddenTextField").focus();
     document.body.style.backgroundColor = thePageBackground;
     updateAllDisplays();
     if (allWordsToGuess.length === 0) {
@@ -161,6 +164,7 @@ function respondToKeyPress() {
                     theWordsGuessedArray.push(theWordToGuess);
                     theMessage = ("You won! You guessed '" + theLettersThatMatchArray.join("") + "'.\nYou have won " + theWins + " games so far.");
                     theGameIsActive = false;
+                    document.getElementById("playAgain").focus();
                     document.getElementById("displayArea").innerHTML = theMessage;
                     theMessage = "Games won: " + theWins;
                     document.getElementById("theWins").innerHTML = theMessage;
@@ -178,6 +182,7 @@ function respondToKeyPress() {
         theWordsGuessedArray.push(theWordToGuess);
         theMessage = ("You ran out of guesses. The correct answer was '" + theWordToGuess.split("").join(" ") + "'.\nYou have won " + theWins + " games so far.")
         theGameIsActive = false;
+        document.getElementById("playAgain").focus();
         document.getElementById("displayArea").innerHTML = theMessage;
         theMessage = "Games won: " + theWins;
         document.getElementById("theWins").innerHTML = theMessage;
