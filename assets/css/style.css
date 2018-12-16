@@ -31,8 +31,11 @@ button {
 }
 
 .hidden {
-    position: absolute;
-    top: -500px;
+    position: relative;
+    left: 100px;
+    width: 1px;
+    height: 1px;
+    z-index: -99;
 }
 
 .displayArea {
