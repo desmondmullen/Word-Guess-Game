@@ -6,42 +6,29 @@
     <title>Word Guess Game</title>
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-
 </head>
 
 <body>
     <div class="hidden"><textarea>&nbsp;</textarea></div>
     <h1 class="centered" id="theHeadline"></h1>
     <br>
+    <section class="centered">
+        <button onclick="startNewGame()">Start New Game</button><button onclick="playAgain()">Play Another Round</button>
+    </section>
     <br>
     <section id="displayArea" class="displayArea centered"></section>
-    <br>
-    <br>
-    <br>
+    ] <br>
     <section id="theWins"></section>
     <br>
     <section id="theLettersGuessed"></section>
     <br>
     <section id="theGuessesRemaining"></section>
     <br>
-    <!-- <section id="theWordsGuessed"></section>-->
-    <br>
-    <br>
-    <br>
     <br>
     <section class="contentCentered">
         <section class="halfWidth girl" id="theTopFiveGirlNames"></section>
         <section class="halfWidth boy" id="theTopFiveBoyNames"></section>
     </section>
-    <br>
-    <section class="centered">
-        <button onclick="resetGame()">Reset Game</button><button onclick="playAgain()">Play Again</button>
-    </section>
-    <br>
-    <section class="centered italic">Click [Reset Game] to start over, or press [Enter] (or click [Play Again]) to try to guess all of the top ten!</section>
-
-
-
 </body>
 
 </html>
