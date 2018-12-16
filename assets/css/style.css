@@ -54,7 +54,7 @@ button {
 
 .halfWidth {
     padding: 0;
-    width: 40%;
+    width: 35%;
 }
 
 .halfWidth.girl {
@@ -66,6 +66,12 @@ button {
 }
 
 .contentCentered {
-    width: 50%;
+    width: 70%;
     display: flex;
+}
+
+.textCentered {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
 }
