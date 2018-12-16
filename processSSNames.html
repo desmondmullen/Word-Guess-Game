@@ -1,0 +1,56 @@
+<!-- this file takes a tab-delimited text file and creates text that can be copied and pasted into the Word Guess Game -->
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <title>Process SS Names</title>
+</head>
+
+<body>
+    <input type="file" name="file" id="file">
+    <br><br>
+    <div id="theOutput" style="width: 60%; height: 500px;"></div>
+
+    <script>
+        let theEntireFile = "";
+        let theLineByLine = "";
+        let theArrays = [];
+        let theLineByLineOutput = "";
+        let theLineSplit = [];
+
+        function doTheWork() {
+            document.getElementById('file').onchange = function() {
+                var file = this.files[0];
+                var reader = new FileReader();
+                reader.onload = function(progressEvent) {
+                    // Entire file
+                    theEntireFile = (this.result);
+                    // By allTheLines
+                    var allTheLines = this.result.split('\n');
+                    for (var eachLine = 0; eachLine < allTheLines.length; eachLine++) {
+                        theLineByLine = (allTheLines[eachLine]);
+                        // push each new name then start new array when line is done
+
+                        // { key1: ["val1", "val2", "val3"], key2: "value2" }
+                        // ["2017", "Emma", "Olivia", "Ava", "Isabella", "Sophia", "Liam", "Noah", "William", "James", "Logan"]
+                        // eachLineProcessed = (theLineByLine.split("\t")[0] + ": [\"" + ((theLineByLine.split("\t").join("\",\"")) + "\"], ");
+                        theLineSplit = (theLineByLine.split("\t"));
+                        theFirstItem = theLineSplit[0]
+                        theLineSplit.shift();
+                        eachLineProcessed = (theFirstItem + ": [\"" + (theLineSplit.join("\",\"")) + "\"], ");
+                        theLineByLineOutput = theLineByLineOutput + eachLineProcessed;
+                        // document.getElementById("theOutput").innerHTML = theLineByLineOutput;
+                    }
+                    document.getElementById("theOutput").innerHTML = "{" + theLineByLineOutput + "}";
+                };
+                reader.readAsText(file);
+            };
+            return;
+        }
+        doTheWork();
+    </script>
+
+</body>
+
+</html>
