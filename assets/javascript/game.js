@@ -18,10 +18,9 @@ const oneHundredYearsOfNamesObject = { 2017: ["Emma", "Olivia", "Ava", "Isabella
 
 const pageBackgrounds = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGrey", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "DarkOrange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Grey", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed", "Indigo", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGrey", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "RebeccaPurple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
 
-let theYearDisplay = prompt("Please enter a year between 1918 and 2017");
+let theYearDisplay = Number(prompt("Please enter a year between 1918 and 2017"));
 let thePageBackground = "";
-if (theYearDisplay > 1924 || 1960 > theYearDisplay) {
-    // thePageBackground = "url(\"assets/images/" + theYearDisplay + ".jpg\")";
+if ((theYearDisplay > 1924) && (theYearDisplay < 1959)) {
     thePageBackground = "<img src=\"assets/images/" + theYearDisplay + ".jpg\" class=\"theBackgroundImage\">";
 } else {
     thePageBackground = pageBackgrounds[theYearDisplay - 1918];
@@ -89,6 +88,13 @@ document.addEventListener("keypress", (event) => {
 function setFocus(theID) {
     document.activeElement.blur();
     document.getElementById(theID).focus();
+}
+
+// this isn't working - together with CSS this should make the background image show fully opaque
+function setFocusBackground() {
+    document.activeElement.blur();
+    console.log("setting opacity on " + document.activeElement);
+    document.getElementById("backgroundImageHolder").focus();
 }
 
 function startNewGame() {
