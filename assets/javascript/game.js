@@ -6,6 +6,7 @@
 // 6. Don't forget to place your global variables and functions above your object.
 //     * Remember: global variables, then objects, then calls.
 
+// rounds count updates too soon
 // get keyboard to show on mobile
 // there may be some game count and other scoring anomalies
 // make some "ta-da" when all ten names are guessed
@@ -39,7 +40,6 @@ let theTopFiveBoyNamesArray = ["1: ", "2: ", "3: ", "4: ", "5: "];
 let theIndex = 0;
 let theGameIsActive = false;
 let theWinsVerbose = ""
-    // let theSimulatedKeyName = ""
 
 function getDifficulty() {
     if (document.getElementById("easyDifficulty").checked) {
@@ -52,15 +52,15 @@ function getDifficulty() {
         }
     }
     updateGuessesRemaining();
-    console.log("difficulty: " + theDifficultyLevel)
-        // setFocus("hiddenTextField");
 }
 
 function makeGameNotActive() {
     theGameIsActive = false;
     setFocus("playAgain");
-    // document.activeElement.blur();
-    // document.getElementById("playAgain").focus();
+    if (theGameIsActive) {
+        respondToKeyPress();
+    }
+
 }
 
 window.onload = function windowLoad() {
@@ -70,7 +70,6 @@ window.onload = function windowLoad() {
 document.addEventListener("keypress", (event) => {
     theKeyName = event.key;
     if (event.key === "Enter") {
-        // console.log(document.activeElement + "/" + document.getElementById('playAgain').activeElement)
         if (document.activeElement !== document.getElementById('playAgain')) {
             playAgain();
         }
@@ -81,20 +80,9 @@ document.addEventListener("keypress", (event) => {
     }
 });
 
-// function simulateKeyPress() {
-//     theSimulatedKeyName = document.createEvent('Event');
-//     theSimulatedKeyName.initEvent('keydown', true, true);
-//     theSimulatedKeyName.keyCode = 76;
-//     return theSimulatedKeyName.keyCode;
-// }
-
 function setFocus(theID) {
     document.activeElement.blur();
     document.getElementById(theID).focus();
-    console.log(document.activeElement);
-    // if (theGameIsActive) {
-    //     respondToKeyPress();
-    // }
 }
 
 function startNewGame() {
@@ -113,8 +101,6 @@ function resetGame() { // full reset
 
 function playAgain() { // partial reset
     setFocus("hiddenTextField");
-    // document.activeElement.blur();
-    // document.getElementById("hiddenTextField").focus();
     theLettersThatMatchArray = [];
     theLettersGuessedArray = [];
     playGame();
@@ -127,11 +113,10 @@ function updateDisplay(theID, theMessage) {
 function updateAllDisplays() {
     updateDisplay("theHeadline", "Guess the Top Baby Names of " + theYearDisplay + "<br><em>Try to fill the top-five lists for both girls and boys!</em>");
     updateDisplay("displayArea", "&nbsp;");
-    updateDisplay("theWins", "Rounds won: " + theWins);
+    updateDisplay("theWins", "Rounds won: " + theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "));
     updateGuessesRemaining();
     // the following field plus theTopFiveGirlNames/BoyNames should be "localized" as needed for different games
-    // updateDisplay("theWordsGuessed", "Names guessed: " + theWordsGuessedArray.join(", "));
     updateTopFiveDisplays();
 }
 
@@ -166,9 +151,6 @@ function playGame() {
     getDifficulty();
     document.body.style.backgroundColor = thePageBackground;
     setFocus("hiddenTextField");
-    // document.activeElement.blur();
-    // document.getElementById("hiddenTextField").focus();
-    console.log(document.activeElement);
 
     updateAllDisplays();
     if (allWordsToGuess.length === 0) {
@@ -197,8 +179,6 @@ function respondToKeyPress() {
         // if it is not a letter then we will do nothing (maybe beep?)
         if (!allTheValidGuesses.includes(theKeyName.toLowerCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toLowerCase())) { //beep
         } else {
-            // if (!allTheValidGuesses.includes(theKeyName) || theKeyName.length !== 1) {} else {
-            // theLettersGuessedArray.includes(theKeyName)
             theLettersGuessedArray.push(theKeyName.toLowerCase());
             updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "))
             if (theWordToGuess.toLowerCase().includes(theKeyName.toLowerCase())) {
@@ -222,13 +202,8 @@ function respondToKeyPress() {
                     theWordsGuessedArray.push(theWordToGuess);
                     theWinsVerboseFunction();
                     theMessage = ("You won! You guessed '" + theLettersThatMatchArray.join("") + theWinsVerbose);
-                    // theGameIsActive = false;
-                    // document.activeElement.blur();
-                    // document.getElementById("playAgain").focus();
                     document.getElementById("displayArea").innerHTML = theMessage;
-                    theMessage = "Rounds won: " + theWins;
-                    document.getElementById("theWins").innerHTML = theMessage;
-                    updateTopFiveDisplays()
+                    updateAllDisplays()
                     makeGameNotActive()
                 }
                 //if the guess is wrong the we decrement the guesses remaining
@@ -243,13 +218,8 @@ function respondToKeyPress() {
         theWordsGuessedArray.push(theWordToGuess);
         theWinsVerboseFunction();
         theMessage = ("You ran out of guesses. The correct answer was '" + theWordToGuess + "'.\nYou have won " + theWins + " games so far.")
-            // theGameIsActive = false;
-            // document.activeElement.blur();
-            // document.getElementById("playAgain").focus();
         document.getElementById("displayArea").innerHTML = theMessage;
-        theMessage = "Rounds won: " + theWins;
-        document.getElementById("theWins").innerHTML = theMessage;
-        updateTopFiveDisplays()
+        updateAllDisplays()
         makeGameNotActive()
     }
 }
