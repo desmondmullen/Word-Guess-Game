@@ -7,7 +7,7 @@
 //     * Remember: global variables, then objects, then calls.
 
 // rounds count updates too soon
-// get keyboard to show on mobile
+// get keyboard to show on mobile consistently and easily
 // there may be some game count and other scoring anomalies
 // make some "ta-da" when all ten names are guessed
 // play sounds
@@ -18,9 +18,10 @@ const oneHundredYearsOfNamesObject = { 2017: ["Emma", "Olivia", "Ava", "Isabella
 
 const pageBackgrounds = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGrey", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "DarkOrange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Grey", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed", "Indigo", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGrey", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "RebeccaPurple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
 
-let theYearDisplay = Number(prompt("Please enter a year between 1918 and 2017"));
+let theYearDisplay = Number(prompt("Please enter a year between 1918 and 2017 to start guessing the most popular names for that year:"));
+// need error checking here^
 let thePageBackground = "";
-if ((theYearDisplay > 1924) && (theYearDisplay < 1959)) {
+if ((theYearDisplay > 1924) && (theYearDisplay < 1959)) { // currently we only have a subset of year images
     thePageBackground = "<img src=\"assets/images/" + theYearDisplay + ".jpg\" class=\"theBackgroundImage\">";
 } else {
     thePageBackground = pageBackgrounds[theYearDisplay - 1918];
@@ -128,7 +129,7 @@ function updateAllDisplays() {
     updateDisplay("theWins", "Rounds won: " + theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "));
     updateGuessesRemaining();
-    // the following field plus theTopFiveGirlNames/BoyNames should be "localized" as needed for different games
+    // the following field plus theTopFiveGirlNames/BoyNames would be "localized" as needed for different games
     updateTopFiveDisplays();
 }
 
@@ -162,7 +163,6 @@ function playGame() {
     theGameIsActive = true;
     getDifficulty();
     if (thePageBackground.includes(".jpg")) {
-        // document.body.style.backgroundImage = thePageBackground;
         updateDisplay("backgroundImageHolder", thePageBackground);
     } else {
         document.body.style.backgroundColor = thePageBackground;
@@ -186,7 +186,7 @@ function playGame() {
         for (var count = 0; count < theWordToGuess.length; count++) {
             theLettersThatMatchArray.push("_");
         }
-        console.log(theWordToGuess);
+        console.log(theWordToGuess); // for cheaters!
         updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
     }
 }
