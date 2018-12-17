@@ -9,28 +9,31 @@
 </head>
 
 <body>
-    <h1 class="centered" id="theHeadline"></h1>
-    <br>
-    <section class="centered">
-        <button onclick="startNewGame()">Start New Game</button><textarea id="hiddenTextField" class="hidden"></textarea><button id="playAgain" onclick="playAgain()">Play Another Round</button>
-        <br><input onclick="getDifficulty()" type="radio" name="difficulty" id="easyDifficulty" value="easy"> Easy&nbsp;&nbsp;<input onclick="getDifficulty()" type="radio" name="difficulty" id="standardDifficulty" value="standard" checked="checked"> Standard&nbsp;&nbsp;
-        <input onclick="getDifficulty()" type="radio" name="difficulty" id="hardDifficulty" value="hard"> Hard
-    </section>
-    <br>
-    <section id="displayArea" class="displayArea centered"></section>
-    <br>
-    <br>
-    <section id="theWins"></section>
-    <br>
-    <section id="theLettersGuessed"></section>
-    <br>
-    <section id="theGuessesRemaining"></section>
-    <br>
-    <br>
-    <section class="contentCentered">
-        <section class="halfWidth girl" id="theTopFiveGirlNames"></section>
-        <section class="halfWidth boy" id="theTopFiveBoyNames"></section>
-    </section>
+    <div id="backgroundImageHolder" class="backgroundImageHolder"></div>
+    <div class="bodyContent">
+        <h1 class="centered" id="theHeadline"></h1>
+        <br>
+        <section class="centered">
+            <button onclick="startNewGame()">Start New Game</button><textarea id="hiddenTextField" class="hidden"></textarea><button id="playAgain" onclick="playAgain()">Play Another Round</button>
+            <br><input onclick="getDifficulty()" type="radio" name="difficulty" id="easyDifficulty" value="easy"> Easy&nbsp;&nbsp;<input onclick="getDifficulty()" type="radio" name="difficulty" id="standardDifficulty" value="standard" checked="checked">            Standard&nbsp;&nbsp;
+            <input onclick="getDifficulty()" type="radio" name="difficulty" id="hardDifficulty" value="hard"> Hard
+        </section>
+        <br>
+        <section id="displayArea" class="displayArea centered"></section>
+        <br>
+        <br>
+        <section id="theWins"></section>
+        <br>
+        <section id="theLettersGuessed"></section>
+        <br>
+        <section id="theGuessesRemaining"></section>
+        <br>
+        <br>
+        <section class="contentCentered">
+            <section class="halfWidth girl" id="theTopFiveGirlNames"></section>
+            <section class="halfWidth boy" id="theTopFiveBoyNames"></section>
+        </section>
+    </div>
 </body>
 
 </html>
