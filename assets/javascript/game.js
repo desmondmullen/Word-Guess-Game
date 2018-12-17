@@ -22,7 +22,7 @@ let thePageBackground = pageBackgrounds[theYearDisplay - 1918];
 const allWordsReset = [...oneHundredYearsOfNamesObject[theYearDisplay]];
 const allWordsToGuess = [...allWordsReset];
 var theWordToGuess = "";
-const allTheValidGuesses = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const allTheValidGuesses = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let theWins = 0;
 let theGuessesRemaining = 0;
 let theDifficultyLevel = 2;
@@ -50,13 +50,9 @@ function getDifficulty() {
             theDifficultyLevel = -1;
         }
     }
-    console.log("difficulty: " + theDifficultyLevel)
     updateGuessesRemaining();
-    setFocus("hiddenTextField");
-}
-
-function setDifficulty() {
-    getDifficulty();
+    console.log("difficulty: " + theDifficultyLevel)
+        // setFocus("hiddenTextField");
 }
 
 function makeGameNotActive() {
@@ -65,13 +61,6 @@ function makeGameNotActive() {
     // document.activeElement.blur();
     // document.getElementById("playAgain").focus();
 }
-
-function setFocus(theID) {
-    document.activeElement.blur();
-    document.getElementById(theID).focus();
-    console.log(document.activeElement);
-}
-
 
 window.onload = function windowLoad() {
     resetGame();
@@ -90,6 +79,12 @@ document.addEventListener("keypress", (event) => {
         }
     }
 });
+
+function setFocus(theID) {
+    document.activeElement.blur();
+    document.getElementById(theID).focus();
+    console.log(document.activeElement);
+}
 
 function startNewGame() {
     location.reload();
@@ -189,11 +184,11 @@ function playGame() {
 function respondToKeyPress() {
     if (theGuessesRemaining > 0) {
         // if it is not a letter then we will do nothing (maybe beep?)
-        if (!allTheValidGuesses.includes(theKeyName) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName)) { //beep
+        if (!allTheValidGuesses.includes(theKeyName.toUpperCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toUpperCase())) { //beep
         } else {
             // if (!allTheValidGuesses.includes(theKeyName) || theKeyName.length !== 1) {} else {
             // theLettersGuessedArray.includes(theKeyName)
-            theLettersGuessedArray.push(theKeyName);
+            theLettersGuessedArray.push(theKeyName.toUpperCase());
             updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "))
             if (theWordToGuess.toLowerCase().includes(theKeyName.toLowerCase())) {
                 // redo the display
