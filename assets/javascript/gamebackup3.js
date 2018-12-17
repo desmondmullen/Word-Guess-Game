@@ -22,7 +22,7 @@ let thePageBackground = pageBackgrounds[theYearDisplay - 1918];
 const allWordsReset = [...oneHundredYearsOfNamesObject[theYearDisplay]];
 const allWordsToGuess = [...allWordsReset];
 var theWordToGuess = "";
-const allTheValidGuesses = "abcdefghijklmnopqrstuvwxyz";
+const allTheValidGuesses = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let theWins = 0;
 let theGuessesRemaining = 0;
 let theDifficultyLevel = 2;
@@ -39,7 +39,6 @@ let theTopFiveBoyNamesArray = ["1: ", "2: ", "3: ", "4: ", "5: "];
 let theIndex = 0;
 let theGameIsActive = false;
 let theWinsVerbose = ""
-    // let theSimulatedKeyName = ""
 
 function getDifficulty() {
     if (document.getElementById("easyDifficulty").checked) {
@@ -81,20 +80,10 @@ document.addEventListener("keypress", (event) => {
     }
 });
 
-// function simulateKeyPress() {
-//     theSimulatedKeyName = document.createEvent('Event');
-//     theSimulatedKeyName.initEvent('keydown', true, true);
-//     theSimulatedKeyName.keyCode = 76;
-//     return theSimulatedKeyName.keyCode;
-// }
-
 function setFocus(theID) {
     document.activeElement.blur();
     document.getElementById(theID).focus();
     console.log(document.activeElement);
-    // if (theGameIsActive) {
-    //     respondToKeyPress();
-    // }
 }
 
 function startNewGame() {
@@ -195,11 +184,11 @@ function playGame() {
 function respondToKeyPress() {
     if (theGuessesRemaining > 0) {
         // if it is not a letter then we will do nothing (maybe beep?)
-        if (!allTheValidGuesses.includes(theKeyName.toLowerCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toLowerCase())) { //beep
+        if (!allTheValidGuesses.includes(theKeyName.toUpperCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toUpperCase())) { //beep
         } else {
             // if (!allTheValidGuesses.includes(theKeyName) || theKeyName.length !== 1) {} else {
             // theLettersGuessedArray.includes(theKeyName)
-            theLettersGuessedArray.push(theKeyName.toLowerCase());
+            theLettersGuessedArray.push(theKeyName.toUpperCase());
             updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "))
             if (theWordToGuess.toLowerCase().includes(theKeyName.toLowerCase())) {
                 // redo the display
