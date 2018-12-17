@@ -25,6 +25,7 @@ var theWordToGuess = "";
 const allTheValidGuesses = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let theWins = 0;
 let theGuessesRemaining = 0;
+let theDifficultyLevel = 2;
 let theLettersGuessedArray = [];
 let theWordToGuessArray = [];
 let theLettersThatMatchArray = [];
@@ -39,6 +40,39 @@ let theIndex = 0;
 let theGameIsActive = false;
 let theWinsVerbose = ""
 
+function getDifficulty() {
+    if (document.getElementById("easyDifficulty").checked) {
+        theDifficultyLevel = 4;
+    } else {
+        if (document.getElementById("standardDifficulty").checked) {
+            theDifficultyLevel = 2;
+        } else {
+            theDifficultyLevel = -1;
+        }
+    }
+    console.log("difficulty: " + theDifficultyLevel)
+    updateGuessesRemaining();
+    setFocus("hiddenTextField");
+}
+
+function setDifficulty() {
+    getDifficulty();
+}
+
+function makeGameNotActive() {
+    theGameIsActive = false;
+    setFocus("playAgain");
+    // document.activeElement.blur();
+    // document.getElementById("playAgain").focus();
+}
+
+function setFocus(theID) {
+    document.activeElement.blur();
+    document.getElementById(theID).focus();
+    console.log(document.activeElement);
+}
+
+
 window.onload = function windowLoad() {
     resetGame();
 };
@@ -46,6 +80,7 @@ window.onload = function windowLoad() {
 document.addEventListener("keypress", (event) => {
     theKeyName = event.key;
     if (event.key === "Enter") {
+        // console.log(document.activeElement + "/" + document.getElementById('playAgain').activeElement)
         if (document.activeElement !== document.getElementById('playAgain')) {
             playAgain();
         }
@@ -71,8 +106,9 @@ function resetGame() { // full reset
 }
 
 function playAgain() { // partial reset
-    document.activeElement.blur();
-    document.getElementById("hiddenTextField").focus();
+    setFocus("hiddenTextField");
+    // document.activeElement.blur();
+    // document.getElementById("hiddenTextField").focus();
     theLettersThatMatchArray = [];
     theLettersGuessedArray = [];
     playGame();
@@ -83,14 +119,19 @@ function updateDisplay(theID, theMessage) {
 }
 
 function updateAllDisplays() {
-    updateDisplay("theHeadline", "Guess the Top Baby Names of " + theYearDisplay + "<br><em>Try to fill the top five lists for both girls and boys!</em>");
+    updateDisplay("theHeadline", "Guess the Top Baby Names of " + theYearDisplay + "<br><em>Try to fill the top-five lists for both girls and boys!</em>");
     updateDisplay("displayArea", "&nbsp;");
-    updateDisplay("theWins", "Games won: " + theWins);
+    updateDisplay("theWins", "Rounds won: " + theWins);
     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "));
-    updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
+    updateGuessesRemaining();
     // the following field plus theTopFiveGirlNames/BoyNames should be "localized" as needed for different games
     // updateDisplay("theWordsGuessed", "Names guessed: " + theWordsGuessedArray.join(", "));
-    updateTopFiveDisplays()
+    updateTopFiveDisplays();
+}
+
+function updateGuessesRemaining() {
+    theGuessesRemaining = theWordToGuess.length + theDifficultyLevel;
+    updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
 }
 
 function updateTopFiveDisplays() {
@@ -108,17 +149,19 @@ function updateTopFiveDisplays() {
 
 function theWinsVerboseFunction() {
     if (theWins === 1) {
-        theWinsVerbose = "'.\nYou have won " + theWins + " game so far.";
+        theWinsVerbose = "'.\nYou have won " + theWins + " round so far.";
     } else {
-        theWinsVerbose = "'.\nYou have won " + theWins + " games so far.";
+        theWinsVerbose = "'.\nYou have won " + theWins + " rounds so far.";
     }
 }
 
 function playGame() {
     theGameIsActive = true;
+    getDifficulty();
     document.body.style.backgroundColor = thePageBackground;
-    document.activeElement.blur();
-    document.getElementById("hiddenTextField").focus();
+    setFocus("hiddenTextField");
+    // document.activeElement.blur();
+    // document.getElementById("hiddenTextField").focus();
     console.log(document.activeElement);
 
     updateAllDisplays();
@@ -132,8 +175,7 @@ function playGame() {
         // remove that word from our master list so it won't be repeated if someone plays again
         allWordsToGuess.splice(theRandomNumber, 1);
         randomMax = (allWordsToGuess.length - 1);
-        theGuessesRemaining = theWordToGuess.length + 2;
-        updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
+        updateGuessesRemaining();
         // put the word into an array
         theWordToGuessArray = theWordToGuess.split("");
         for (var count = 0; count < theWordToGuess.length; count++) {
@@ -174,13 +216,14 @@ function respondToKeyPress() {
                     theWordsGuessedArray.push(theWordToGuess);
                     theWinsVerboseFunction();
                     theMessage = ("You won! You guessed '" + theLettersThatMatchArray.join("") + theWinsVerbose);
-                    theGameIsActive = false;
-                    document.activeElement.blur();
-                    document.getElementById("playAgain").focus();
+                    // theGameIsActive = false;
+                    // document.activeElement.blur();
+                    // document.getElementById("playAgain").focus();
                     document.getElementById("displayArea").innerHTML = theMessage;
-                    theMessage = "Games won: " + theWins;
+                    theMessage = "Rounds won: " + theWins;
                     document.getElementById("theWins").innerHTML = theMessage;
                     updateTopFiveDisplays()
+                    makeGameNotActive()
                 }
                 //if the guess is wrong the we decrement the guesses remaining
             } else {
@@ -190,17 +233,17 @@ function respondToKeyPress() {
             }
         }
     }
-    if (theGuessesRemaining == 0) {
+    if (theGuessesRemaining === 0) {
         theWordsGuessedArray.push(theWordToGuess);
-        // theMessage = ("You ran out of guesses. The correct answer was '" + theWordToGuess.split("").join(" ") + "'.\nYou have won " + theWins + " games so far.")
         theWinsVerboseFunction();
         theMessage = ("You ran out of guesses. The correct answer was '" + theWordToGuess + "'.\nYou have won " + theWins + " games so far.")
-        theGameIsActive = false;
-        document.activeElement.blur();
-        document.getElementById("playAgain").focus();
+            // theGameIsActive = false;
+            // document.activeElement.blur();
+            // document.getElementById("playAgain").focus();
         document.getElementById("displayArea").innerHTML = theMessage;
-        theMessage = "Games won: " + theWins;
+        theMessage = "Rounds won: " + theWins;
         document.getElementById("theWins").innerHTML = theMessage;
         updateTopFiveDisplays()
+        makeGameNotActive()
     }
 }
