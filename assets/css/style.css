@@ -15,10 +15,8 @@ body {
 
 .theBackgroundImage {
     position: absolute;
-    max-width: 90vw;
-    min-width: 90vw;
-    margin-left: 2.5vw;
-    /* most New Yorker covers have a band down the left side. This helps make that still look centered */
+    max-width: 100vw;
+    min-width: 100vw;
     opacity: 0.1;
     z-index: -99;
 }

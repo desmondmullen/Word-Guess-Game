@@ -21,7 +21,7 @@ const pageBackgrounds = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azu
 let theYearDisplay = Number(prompt("Please enter a year between 1918 and 2017 to start guessing the most popular names for that year:"));
 // need error checking here^
 let thePageBackground = "";
-if ((theYearDisplay > 1924) && (theYearDisplay < 1959)) { // currently we only have a subset of year images
+if (theYearDisplay < 1976) { // currently we only have a subset of year images
     thePageBackground = "<img src=\"assets/images/" + theYearDisplay + ".jpg\" class=\"theBackgroundImage\">";
 } else {
     thePageBackground = pageBackgrounds[theYearDisplay - 1918];
