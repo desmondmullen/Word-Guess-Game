@@ -146,6 +146,17 @@ function updateAllDisplays() {
     updateTopFiveDisplays();
 }
 
+// fix this kluge
+function updateAllDisplaysKLUGE() {
+    updateDisplay("theHeadline", "Guess the Top Baby Names of " + theYearDisplay);
+    // updateDisplay("displayArea", "&nbsp;");
+    updateDisplay("theWins", "Rounds won: " + theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
+    updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
+    updateGuessesRemaining();
+    // the following field plus theTopFiveGirlNames/BoyNames would be "localized" as needed for different games
+    updateTopFiveDisplays();
+}
+
 function updateGuessesRemaining() {
     theGuessesRemaining = theWordToGuess.length + theDifficultyLevel;
     updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
@@ -216,9 +227,8 @@ function respondToKeyPress() {
         if (!allTheValidGuesses.includes(theKeyName.toLowerCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toLowerCase())) { //beep
         } else {
             // delete an underscore from theLettersGuessedArray
-            // theLettersGuessedArray.splice(-1);
-            theLettersGuessedArray.splice((theWordToGuess.length - theGuessesRemaining), 1, theKeyName.toLowerCase());
-            theLettersThatMatchArray.shift("_");
+            theLettersGuessedArray.splice(((theWordToGuess.length + theDifficultyLevel) - theGuessesRemaining), 1, theKeyName.toLowerCase());
+            // theLettersThatMatchArray.shift("_");
 
             updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
             if (theWordToGuess.toLowerCase().includes(theKeyName.toLowerCase())) {
@@ -243,7 +253,7 @@ function respondToKeyPress() {
                     theWinsVerboseFunction();
                     theMessage = ("You won! You guessed '" + theLettersThatMatchArray.join("") + theWinsVerbose);
                     document.getElementById("displayArea").innerHTML = theMessage;
-                    updateAllDisplays()
+                    updateAllDisplaysKLUGE()
                     makeGameNotActive()
                 }
                 //if the guess is wrong the we decrement the guesses remaining
