@@ -20,6 +20,7 @@ const pageBackgrounds = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azu
 
 let theYearDisplay = Number(prompt("Please enter a year between 1918 and 2017 to start guessing the most popular names for that year:"));
 // need error checking here^
+
 // let thePageBackground = "";
 // let theShortPageBackground = "";
 // if (theYearDisplay < 1976) { // currently we only have a subset of year images
@@ -136,10 +137,10 @@ function updateDisplay(theID, theMessage) {
 }
 
 function updateAllDisplays() {
-    updateDisplay("theHeadline", "Guess the Top Baby Names of " + theYearDisplay + "<br><em>Try to fill the top-five lists for both girls and boys!</em>");
+    updateDisplay("theHeadline", "Guess the Top Baby Names of " + theYearDisplay);
     updateDisplay("displayArea", "&nbsp;");
     updateDisplay("theWins", "Rounds won: " + theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
-    updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "));
+    updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
     updateGuessesRemaining();
     // the following field plus theTopFiveGirlNames/BoyNames would be "localized" as needed for different games
     updateTopFiveDisplays();
@@ -159,8 +160,8 @@ function updateTopFiveDisplays() {
             theTopFiveBoyNamesArray.splice(theIndex - 5, 1, (theIndex - 4) + ": " + theWordToGuess);
         }
     }
-    updateDisplay("theTopFiveGirlNames", "<span class=\"textCentered\">Top Five Girl Names of " + theYearDisplay + "</span><br><ul><li>" + theTopFiveGirlNamesArray.join("</li><li>") + "</li></ul>");
-    updateDisplay("theTopFiveBoyNames", "<span class=\"textCentered\">Top Five Boy Names of " + theYearDisplay + "</span><br><ul><li>" + theTopFiveBoyNamesArray.join("</li><li>") + "</li></ul>");
+    updateDisplay("theTopFiveGirlNames", "Top Five Girl Names of " + theYearDisplay + "<br><ul><li>" + theTopFiveGirlNamesArray.join("</li><li>") + "</li></ul>");
+    updateDisplay("theTopFiveBoyNames", "Top Five Boy Names of " + theYearDisplay + "<br><ul><li>" + theTopFiveBoyNamesArray.join("</li><li>") + "</li></ul>");
 }
 
 function theWinsVerboseFunction() {
@@ -197,9 +198,15 @@ function playGame() {
         theWordToGuessArray = theWordToGuess.split("");
         for (var count = 0; count < theWordToGuess.length; count++) {
             theLettersThatMatchArray.push("_");
+            theLettersGuessedArray.push("_");
+        }
+        for (var count = 0; count < theDifficultyLevel; count++) {
+            theLettersGuessedArray.push("_");
         }
         console.log(theWordToGuess); // for cheaters!
         updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
+        updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "))
+
     }
 }
 
@@ -208,8 +215,12 @@ function respondToKeyPress() {
         // if it is not a letter then we will do nothing (maybe beep?)
         if (!allTheValidGuesses.includes(theKeyName.toLowerCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toLowerCase())) { //beep
         } else {
-            theLettersGuessedArray.push(theKeyName.toLowerCase());
-            updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(", "))
+            // delete an underscore from theLettersGuessedArray
+            // theLettersGuessedArray.splice(-1);
+            theLettersGuessedArray.splice((theWordToGuess.length - theGuessesRemaining), 1, theKeyName.toLowerCase());
+            theLettersThatMatchArray.shift("_");
+
+            updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
             if (theWordToGuess.toLowerCase().includes(theKeyName.toLowerCase())) {
                 // redo the display
                 for (i = 0; i < theWordToGuess.length; i++) {
