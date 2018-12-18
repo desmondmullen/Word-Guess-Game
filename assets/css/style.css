@@ -64,9 +64,17 @@ button {
     margin: 20px;
 }
 
+section.bottomOfWindow {
+    position: fixed;
+    width: 100%;
+    padding: 0;
+    bottom: 0;
+    left: 0;
+    /* right: 0; */
+}
+
 .hidden {
     position: relative;
-    left: 100px;
     width: 1px;
     height: 1px;
     z-index: -99;
