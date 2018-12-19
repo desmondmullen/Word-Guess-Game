@@ -18,6 +18,8 @@ const oneHundredYearsOfNamesObject = { 2017: ["Emma", "Olivia", "Ava", "Isabella
 
 const pageBackgrounds = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGrey", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "DarkOrange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Grey", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed", "Indigo", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGrey", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "RebeccaPurple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
 
+// first erroneous guess not getting counted
+
 let theYearDisplay = Number(prompt("Please enter a year between 1918 and 2017 to start guessing the most popular names for that year:"));
 // need error checking here^
 
@@ -98,11 +100,11 @@ function setFocus(theID) {
 }
 
 // this isn't working - together with CSS this should make the background image show fully opaque
-function setFocusBackground() {
-    document.activeElement.blur();
-    console.log("setting opacity on " + document.activeElement);
-    document.getElementById("backgroundImageHolder").focus();
-}
+// function setFocusBackground() {
+//     document.activeElement.blur();
+//     console.log("setting opacity on " + document.activeElement);
+//     document.getElementById("backgroundImageHolder").focus();
+// }
 
 function startNewGame() {
     location.reload();
@@ -227,11 +229,15 @@ function respondToKeyPress() {
         if (!allTheValidGuesses.includes(theKeyName.toLowerCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toLowerCase())) { //beep
         } else {
             // delete an underscore from theLettersGuessedArray
-            theLettersGuessedArray.splice(((theWordToGuess.length + theDifficultyLevel) - theGuessesRemaining), 1, theKeyName.toLowerCase());
-            // theLettersThatMatchArray.shift("_");
+            // theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 1, theKeyName.toLowerCase());
+            // console.log(theLettersGuessedArray.indexOf('_'));
 
-            updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
+            // updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
             if (theWordToGuess.toLowerCase().includes(theKeyName.toLowerCase())) {
+                theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 0, theKeyName.toLowerCase());
+                updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
+
+                console.log(theLettersGuessedArray.indexOf('_'));
                 // redo the display
                 for (i = 0; i < theWordToGuess.length; i++) {
                     // if theKeyName is in theWordToGuessArray position[i] then splice
@@ -258,6 +264,11 @@ function respondToKeyPress() {
                 }
                 //if the guess is wrong the we decrement the guesses remaining
             } else {
+                theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 1, theKeyName.toLowerCase());
+                updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
+
+                console.log(theLettersGuessedArray.indexOf('_'));
+
                 theGuessesRemaining = theGuessesRemaining - 1;
                 theMessage = "Guesses remaining: " + theGuessesRemaining;
                 document.getElementById("theGuessesRemaining").innerHTML = theMessage;
@@ -269,7 +280,7 @@ function respondToKeyPress() {
         theWinsVerboseFunction();
         theMessage = ("You ran out of guesses. The correct answer was '" + theWordToGuess + "'.\nYou have won " + theWins + " games so far.")
         document.getElementById("displayArea").innerHTML = theMessage;
-        updateAllDisplays()
+        updateAllDisplaysKLUGE()
         makeGameNotActive()
     }
 }
