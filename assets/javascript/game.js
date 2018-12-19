@@ -45,6 +45,8 @@ let theTopFiveBoyNamesArray = ["1: ", "2: ", "3: ", "4: ", "5: "];
 let theIndex = 0;
 let theGameIsActive = false;
 let theWinsVerbose = ""
+let IDtoBringForward = "backgroundImageHolder";
+
 
 function getDifficulty() {
     if (document.getElementById("easyDifficulty").checked) {
@@ -122,7 +124,7 @@ function updateDisplay(theID, theMessage) {
 }
 
 function updateAllDisplays() {
-    updateDisplay("theHeadline", "Guess the Top Baby Names of " + theYearDisplay);
+    updateDisplay("theHeadline", "<em>Guess the Top Baby Names of " + theYearDisplay + "</em>");
     updateDisplay("displayArea", "&nbsp;");
     updateDisplay("theWins", "Rounds won: " + theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
@@ -133,7 +135,7 @@ function updateAllDisplays() {
 
 // fix this kludge
 function updateAllDisplaysKLUDGE() {
-    updateDisplay("theHeadline", "Guess the Top Baby Names of " + theYearDisplay);
+    updateDisplay("theHeadline", "<em>Guess the Top Baby Names of " + theYearDisplay + "</em>");
     // updateDisplay("displayArea", "&nbsp;");
     updateDisplay("theWins", "Rounds won: " + theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
