@@ -16,12 +16,24 @@ const oneHundredYearsOfNamesObject = { 2017: ["Emma", "Olivia", "Ava", "Isabella
 
 const pageBackgrounds = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGrey", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "DarkOrange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Grey", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed", "Indigo", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGrey", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "RebeccaPurple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
 
+window.onload = function windowLoad() {
+    resetGame();
+    // window.location.href = "index.html";
+};
+
 let theYearDisplay = Number(prompt("Please enter any year from 1918 to 2017 and guess the most popular names for that year:"));
-if ((theYearDisplay > 2017 || theYearDisplay < 1918) && theYearDisplay != NaN) {
-    theYearDisplay = Number(prompt("Please enter a number from 1918 to 2017"));
-    if ((theYearDisplay > 2017 || theYearDisplay < 1918) && theYearDisplay != NaN) {}
+if (theYearDisplay === null) { // if user cancels, go back to start screen
+    window.location.href = "index.html";
+} else { // otherwise, check to see if it's a useable year
+    if ((theYearDisplay > 2017 || theYearDisplay < 1918) && theYearDisplay != NaN) { // not a useable number
+        theYearDisplay = Number(prompt("Please enter a number from 1918 to 2017"));
+    } else { // user cancelled or pressed OK with no number (may be text or nothing) in field
+        if (theYearDisplay > 2017 || theYearDisplay < 1918 || theYearDisplay === NaN || theYearDisplay === null) { // sounds like they don't want to play
+            window.location.href = "index.html";
+        }
+    }
 }
-// need error checking here^
+
 
 let theShortPageBackground = "assets/images/" + theYearDisplay + ".jpg";
 let thePageBackground = "<img src=\"assets/images/" + theYearDisplay + ".jpg\" class=\"theBackgroundImage\">";
@@ -69,10 +81,6 @@ function makeGameNotActive() {
     }
 }
 
-window.onload = function windowLoad() {
-    resetGame();
-};
-
 document.addEventListener("keypress", (event) => {
     theKeyName = event.key;
     if (event.key === "Enter") {
@@ -112,6 +120,10 @@ function playAgain() { // partial reset
     playGame();
 }
 
+function backToStart() {
+    window.location.href = "index.html";
+}
+
 function showBackgroundImage() {
     if (thePageBackground.includes(".jpg")) {
         window.open(theShortPageBackground);
@@ -146,7 +158,7 @@ function updateAllDisplaysKLUDGE() {
 
 function updateGuessesRemaining() {
     theGuessesRemaining = theWordToGuess.length + theDifficultyLevel;
-    updateDisplay("theGuessesRemaining", "Guesses remaining: " + theGuessesRemaining);
+    updateDisplay("theGuessesRemaining", "<strong>Guesses remaining: </strong>" + theGuessesRemaining);
 }
 
 function updateTopFiveDisplays() {

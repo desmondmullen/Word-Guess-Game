@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="assets/javascript/game.js"></script>
+    <script src="assets/javascript/startScreen.js"></script>
     <title>Word Guess Game</title>
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -12,10 +12,19 @@
 <!-- <body onclick="setFocusBackground()"> -->
 
 <body>
-    <div id="backgroundImageHolder" class="backgroundImageHolder"></div>
-    <div class="bodyContent">
-        <h1 class="textCentered" id="theHeadline"></h1>
-        <!-- <p class="textCentered">Try to fill the top-five lists for both girls and boys!</p> -->
+    <div id="backgroundImageHolder" class="backgroundImageHolder"><img src="assets/images/newspapers.jpg" class="newspapers"></div>
+    <div id="startScreenTextHolder" class="startScreenTextHolder">
+        <h1>Guess the top-ten baby names for any of the last hundred years!</h1>
+        <p class="startScreen"><strong>Choose a year and try to guess the top names</strong>, one at a time. See if you can guess all ten without running out of guesses!</p>
+        <p class="startScreen">After each round, you'll see where that name ranked in the year. Play ten rounds (one full game) to see where all the names ranked.</p>
+        <p class="startScreen">A <strong>newspaper front page from the year you've chosen</strong> will show up in the background to remind you of some of the things people were thinking about that year. <em>You can scroll the background up and down. Click the button at the bottom of the page to see the unobstructed newspaper front page on a new page.</em></p>
+        <p class="startScreen">Click the button below or press any key to start.</p>
+        <button id="startFromStartScreen" onclick="startFromStartScreen()" class="centered">Start New Game</button>
+    </div>
+    <div id="backgroundImageHolder" class="backgroundImageHolder"><img src="assets/images/baby.cropped.scaled.png" class="baby"></div>
+    <div class="startScreenBodyContent">
+        <!-- <h1 class="textCentered" id="theHeadline"></h1>
+        <p class="textCentered">Try to fill the top-five lists for both girls and boys!</p>
         <section class="textCentered">
             <button onclick="startNewGame()">Start New Game</button><textarea id="hiddenTextField" class="hidden"></textarea><button id="playAgain" onclick="playAgain()">Play Another Round</button>
         </section>
@@ -37,11 +46,11 @@
         <section class="textCentered">
             <section class="halfWidth girl" id="theTopFiveGirlNames"></section>
             <section class="halfWidth boy" id="theTopFiveBoyNames"></section>
-        </section>
+        </section> -->
     </div>
-    <section class="textCentered bottomOfWindow">
+    <!-- <section class="textCentered bottomOfWindow">
         <button class="textCentered bottomOfWindow" onclick="showBackgroundImage()">Show the background image in a new window</button>
-    </section>
+    </section> -->
 </body>
 
 </html>
