@@ -99,6 +99,10 @@ function setFocus(theID) {
     document.getElementById(theID).focus();
 }
 
+function focusOnHiddenTextField() {
+    setFocus("hiddenTextField");
+}
+
 function startNewGame() {
     location.reload();
 }
