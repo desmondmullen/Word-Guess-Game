@@ -16,7 +16,11 @@ const oneHundredYearsOfNamesObject = { 2017: ["Emma", "Olivia", "Ava", "Isabella
 
 const pageBackgrounds = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGrey", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "DarkOrange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Grey", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed", "Indigo", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGrey", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "RebeccaPurple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
 
-let theYearDisplay = Number(prompt("Please enter a year between 1918 and 2017 to start guessing the most popular names for that year:"));
+let theYearDisplay = Number(prompt("Please enter any year from 1918 to 2017 and guess the most popular names for that year:"));
+if ((theYearDisplay > 2017 || theYearDisplay < 1918) && theYearDisplay != NaN) {
+    theYearDisplay = Number(prompt("Please enter a number from 1918 to 2017"));
+    if ((theYearDisplay > 2017 || theYearDisplay < 1918) && theYearDisplay != NaN) {}
+}
 // need error checking here^
 
 let theShortPageBackground = "assets/images/" + theYearDisplay + ".jpg";
@@ -61,7 +65,6 @@ function makeGameNotActive() {
     if (theGameIsActive) {
         respondToKeyPress();
     }
-
 }
 
 window.onload = function windowLoad() {
@@ -155,7 +158,6 @@ function updateTopFiveDisplays() {
     }
     updateDisplay("theTopFiveGirlNames", "Top Five Girl Names of " + theYearDisplay + "<br><ul><li>" + theTopFiveGirlNamesArray.join("</li><li>") + "</li></ul>");
     updateDisplay("theTopFiveBoyNames", "Top Five Boy Names of " + theYearDisplay + "<br><ul><li>" + theTopFiveBoyNamesArray.join("</li><li>") + "</li></ul>");
-    console.log("update top five displays");
 }
 
 function playGame() {
@@ -170,8 +172,8 @@ function playGame() {
 
     updateAllDisplays();
     if (allWordsToGuess.length === 0) {
-        // woo-hoo, you guessed all 10! (this needs to be cleaned up)
-        updateDisplay("displayArea", "<em>Woo-hoo! These are the top ten baby names of " + theYearDisplay + "!</em>");
+        // there are no more names to guess (this needs to be cleaned up)
+        updateDisplay("displayArea", "<em>These are the top ten baby names of " + theYearDisplay + "!</em>");
     } else {
         // pick the word based on a random number
         theRandomNumber = Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin;
@@ -220,12 +222,8 @@ function respondToKeyPress() {
                 // then see if the word has been completed
                 if (!theLettersThatMatchArray.includes("_")) {
                     theWins = theWins + 1;
-                    // updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
                     updateDisplay("displayArea", "You won that round!");
                     theWordsGuessedArray.push(theWordToGuess);
-                    // theWinsVerboseFunction();
-                    // theMessage = ("You won that round!");
-                    // document.getElementById("displayArea").innerHTML = theMessage;
                     updateAllDisplaysKLUDGE()
                     makeGameNotActive()
                 }
@@ -241,10 +239,7 @@ function respondToKeyPress() {
     }
     if (theGuessesRemaining === 0) {
         theWordsGuessedArray.push(theWordToGuess);
-        // theWinsVerboseFunction();
         updateDisplay("displayArea", "No guesses left. It was '" + theWordToGuess + "'");
-        // theMessage = ("No guesses left. It was '" + theWordToGuess + "'");
-        // document.getElementById("displayArea").innerHTML = theMessage;
         updateAllDisplaysKLUDGE();
         makeGameNotActive();
     }
