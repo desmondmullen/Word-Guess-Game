@@ -99,13 +99,6 @@ function setFocus(theID) {
     document.getElementById(theID).focus();
 }
 
-// this isn't working - together with CSS this should make the background image show fully opaque
-// function setFocusBackground() {
-//     document.activeElement.blur();
-//     console.log("setting opacity on " + document.activeElement);
-//     document.getElementById("backgroundImageHolder").focus();
-// }
-
 function startNewGame() {
     location.reload();
 }
@@ -148,13 +141,13 @@ function updateAllDisplays() {
     updateTopFiveDisplays();
 }
 
-// fix this kluge
-function updateAllDisplaysKLUGE() {
+// fix this kludge
+function updateAllDisplaysKLUDGE() {
     updateDisplay("theHeadline", "Guess the Top Baby Names of " + theYearDisplay);
     // updateDisplay("displayArea", "&nbsp;");
     updateDisplay("theWins", "Rounds won: " + theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
-    updateGuessesRemaining();
+    // updateGuessesRemaining();
     // the following field plus theTopFiveGirlNames/BoyNames would be "localized" as needed for different games
     updateTopFiveDisplays();
 }
@@ -175,6 +168,7 @@ function updateTopFiveDisplays() {
     }
     updateDisplay("theTopFiveGirlNames", "Top Five Girl Names of " + theYearDisplay + "<br><ul><li>" + theTopFiveGirlNamesArray.join("</li><li>") + "</li></ul>");
     updateDisplay("theTopFiveBoyNames", "Top Five Boy Names of " + theYearDisplay + "<br><ul><li>" + theTopFiveBoyNamesArray.join("</li><li>") + "</li></ul>");
+    console.log("update top five displays");
 }
 
 function theWinsVerboseFunction() {
@@ -237,7 +231,7 @@ function respondToKeyPress() {
                 theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 0, theKeyName.toLowerCase());
                 updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
 
-                console.log(theLettersGuessedArray.indexOf('_'));
+                // console.log(theLettersGuessedArray.indexOf('_'));
                 // redo the display
                 for (i = 0; i < theWordToGuess.length; i++) {
                     // if theKeyName is in theWordToGuessArray position[i] then splice
@@ -259,7 +253,7 @@ function respondToKeyPress() {
                     theWinsVerboseFunction();
                     theMessage = ("You won! You guessed '" + theLettersThatMatchArray.join("") + theWinsVerbose);
                     document.getElementById("displayArea").innerHTML = theMessage;
-                    updateAllDisplaysKLUGE()
+                    updateAllDisplaysKLUDGE()
                     makeGameNotActive()
                 }
                 //if the guess is wrong the we decrement the guesses remaining
@@ -267,7 +261,7 @@ function respondToKeyPress() {
                 theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 1, theKeyName.toLowerCase());
                 updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
 
-                console.log(theLettersGuessedArray.indexOf('_'));
+                // console.log(theLettersGuessedArray.indexOf('_'));
 
                 theGuessesRemaining = theGuessesRemaining - 1;
                 theMessage = "Guesses remaining: " + theGuessesRemaining;
@@ -278,9 +272,9 @@ function respondToKeyPress() {
     if (theGuessesRemaining === 0) {
         theWordsGuessedArray.push(theWordToGuess);
         theWinsVerboseFunction();
-        theMessage = ("You ran out of guesses. The correct answer was '" + theWordToGuess + "'.\nYou have won " + theWins + " games so far.")
+        theMessage = ("You ran out of guesses. The correct answer was '" + theWordToGuess + "'.\nYou have won " + theWins + " rounds so far.")
         document.getElementById("displayArea").innerHTML = theMessage;
-        updateAllDisplaysKLUGE()
+        updateAllDisplaysKLUDGE()
         makeGameNotActive()
     }
 }
