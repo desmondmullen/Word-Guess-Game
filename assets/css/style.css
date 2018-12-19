@@ -32,7 +32,8 @@ body {
     position: fixed;
     width: 50%;
     top: 10%;
-    left: 30vw;
+    left: 50%;
+    margin-left: -25%;
     padding: 20px;
     text-align: center;
     background: linear-gradient(to bottom left, deepskyblue, transparent), linear-gradient(to bottom right, deeppink, transparent), linear-gradient(to top, snow, transparent);
@@ -79,10 +80,11 @@ p.startScreen {
     background: linear-gradient(to bottom left, deepskyblue, transparent), linear-gradient(to bottom right, deeppink, transparent), linear-gradient(to top, snow, transparent);
     background-blend-mode: screen;
     width: 60%;
-    margin: 0 auto;
+    left: 50%;
+    margin-left: -30%;
     padding: 20px;
     top: 15%;
-    left: 20%;
+    /* left: 20%; */
 }
 
 h1 {
