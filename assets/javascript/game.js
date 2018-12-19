@@ -6,9 +6,7 @@
 // 6. Don't forget to place your global variables and functions above your object.
 //     * Remember: global variables, then objects, then calls.
 
-// rounds count updates too soon
 // get keyboard to show on mobile consistently and easily
-// there may be some game count and other scoring anomalies
 // make some "ta-da" when all ten names are guessed
 // play sounds
 // read me file
@@ -18,20 +16,9 @@ const oneHundredYearsOfNamesObject = { 2017: ["Emma", "Olivia", "Ava", "Isabella
 
 const pageBackgrounds = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGrey", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "DarkOrange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Grey", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed", "Indigo", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGrey", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "RebeccaPurple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
 
-// first erroneous guess not getting counted
-
 let theYearDisplay = Number(prompt("Please enter a year between 1918 and 2017 to start guessing the most popular names for that year:"));
 // need error checking here^
 
-// let thePageBackground = "";
-// let theShortPageBackground = "";
-// if (theYearDisplay < 1976) { // currently we only have a subset of year images
-// theShortPageBackground = "assets/images/" + theYearDisplay + ".jpg";
-// thePageBackground = "<img src=\"assets/images/" + theYearDisplay + ".jpg\" class=\"theBackgroundImage\">";
-// } else {
-//     theShortPageBackground = "";
-//     thePageBackground = pageBackgrounds[theYearDisplay - 1918];
-// }
 let theShortPageBackground = "assets/images/" + theYearDisplay + ".jpg";
 let thePageBackground = "<img src=\"assets/images/" + theYearDisplay + ".jpg\" class=\"theBackgroundImage\">";
 const allWordsReset = [...oneHundredYearsOfNamesObject[theYearDisplay]];
@@ -159,7 +146,7 @@ function updateGuessesRemaining() {
 
 function updateTopFiveDisplays() {
     theIndex = (allWordsReset.indexOf(theWordToGuess));
-    if (0 < theIndex) {
+    if (0 <= theIndex) { // changed from < to <=
         if (theIndex <= 4) {
             theTopFiveGirlNamesArray.splice(theIndex, 1, (theIndex + 1) + ": " + theWordToGuess);
         } else {
@@ -169,14 +156,6 @@ function updateTopFiveDisplays() {
     updateDisplay("theTopFiveGirlNames", "Top Five Girl Names of " + theYearDisplay + "<br><ul><li>" + theTopFiveGirlNamesArray.join("</li><li>") + "</li></ul>");
     updateDisplay("theTopFiveBoyNames", "Top Five Boy Names of " + theYearDisplay + "<br><ul><li>" + theTopFiveBoyNamesArray.join("</li><li>") + "</li></ul>");
     console.log("update top five displays");
-}
-
-function theWinsVerboseFunction() {
-    if (theWins === 1) {
-        theWinsVerbose = "'.\nYou have won " + theWins + " round so far.";
-    } else {
-        theWinsVerbose = "'.\nYou have won " + theWins + " rounds so far.";
-    }
 }
 
 function playGame() {
@@ -213,7 +192,6 @@ function playGame() {
         console.log(theWordToGuess); // for cheaters!
         updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
         updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "))
-
     }
 }
 
@@ -223,15 +201,9 @@ function respondToKeyPress() {
         if (!allTheValidGuesses.includes(theKeyName.toLowerCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toLowerCase())) { //beep
         } else {
             // delete an underscore from theLettersGuessedArray
-            // theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 1, theKeyName.toLowerCase());
-            // console.log(theLettersGuessedArray.indexOf('_'));
-
-            // updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
             if (theWordToGuess.toLowerCase().includes(theKeyName.toLowerCase())) {
                 theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 0, theKeyName.toLowerCase());
                 updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
-
-                // console.log(theLettersGuessedArray.indexOf('_'));
                 // redo the display
                 for (i = 0; i < theWordToGuess.length; i++) {
                     // if theKeyName is in theWordToGuessArray position[i] then splice
@@ -248,11 +220,12 @@ function respondToKeyPress() {
                 // then see if the word has been completed
                 if (!theLettersThatMatchArray.includes("_")) {
                     theWins = theWins + 1;
-                    updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
+                    // updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
+                    updateDisplay("displayArea", "You won that round!");
                     theWordsGuessedArray.push(theWordToGuess);
-                    theWinsVerboseFunction();
-                    theMessage = ("You won! You guessed '" + theLettersThatMatchArray.join("") + theWinsVerbose);
-                    document.getElementById("displayArea").innerHTML = theMessage;
+                    // theWinsVerboseFunction();
+                    // theMessage = ("You won that round!");
+                    // document.getElementById("displayArea").innerHTML = theMessage;
                     updateAllDisplaysKLUDGE()
                     makeGameNotActive()
                 }
@@ -260,9 +233,6 @@ function respondToKeyPress() {
             } else {
                 theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 1, theKeyName.toLowerCase());
                 updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
-
-                // console.log(theLettersGuessedArray.indexOf('_'));
-
                 theGuessesRemaining = theGuessesRemaining - 1;
                 theMessage = "Guesses remaining: " + theGuessesRemaining;
                 document.getElementById("theGuessesRemaining").innerHTML = theMessage;
@@ -271,10 +241,11 @@ function respondToKeyPress() {
     }
     if (theGuessesRemaining === 0) {
         theWordsGuessedArray.push(theWordToGuess);
-        theWinsVerboseFunction();
-        theMessage = ("You ran out of guesses. The correct answer was '" + theWordToGuess + "'.\nYou have won " + theWins + " rounds so far.")
-        document.getElementById("displayArea").innerHTML = theMessage;
-        updateAllDisplaysKLUDGE()
-        makeGameNotActive()
+        // theWinsVerboseFunction();
+        updateDisplay("displayArea", "No guesses left. It was '" + theWordToGuess + "'");
+        // theMessage = ("No guesses left. It was '" + theWordToGuess + "'");
+        // document.getElementById("displayArea").innerHTML = theMessage;
+        updateAllDisplaysKLUDGE();
+        makeGameNotActive();
     }
 }
