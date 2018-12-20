@@ -40,6 +40,7 @@ const allTheValidGuesses = "abcdefghijklmnopqrstuvwxyz";
 let theWins = 0;
 let theGuessesRemaining = 0;
 let theDifficultyLevel = 2;
+let theNegativeDifficultyLevel = 0;
 let theLettersGuessedArray = [];
 let theWordToGuessArray = [];
 let theLettersThatMatchArray = [];
@@ -68,10 +69,12 @@ function getDifficulty() { // check the radio buttons and update the difficulty 
 
 function makeGameNotActive() {
     theGameIsActive = false;
-    setFocus("playAgain");
-    if (theGameIsActive) {
-        respondToKeyPress();
+    if (allWordsToGuess.length === 0) { // if there are no more names to guess
+        setFocus("startNewGame");
+    } else {
+        setFocus("playAgain");
     }
+    return;
 }
 
 document.addEventListener("keypress", (event) => {
@@ -164,23 +167,33 @@ function updateGuessesRemaining() {
     updateDisplay("theGuessesRemaining", "<strong>Guesses remaining: </strong>" + theGuessesRemaining);
 }
 
-function makeSound(waveform1, frequency1, start1, stop1, waveform2, frequency2, start2, stop2) { // this is very basic sound generation but it's very flexible and doesn't require more files
-    var context = new(window.AudioContext || window.webkitAudioContext)();
-    var context2 = new(window.AudioContext || window.webkitAudioContext)();
-    var oscillator = context.createOscillator();
-    var oscillator2 = context2.createOscillator();
+function makeSound(waveform1, frequency1, start1, stop1) { // this is very basic sound generation but it's very flexible and doesn't require more files
+    let context = new(window.AudioContext || window.webkitAudioContext)();
+    let context2 = new(window.AudioContext || window.webkitAudioContext)();
+    let oscillator = context.createOscillator();
+    let oscillator2 = context2.createOscillator();
     oscillator.type = waveform1;
     oscillator.frequency.value = frequency1;
     oscillator.connect(context.destination);
     oscillator.start(start1);
     oscillator.stop(context.currentTime + stop1);
-    if (waveform2 != "") {
-        oscillator2.type = waveform2;
-        oscillator2.frequency.value = frequency2;
-        oscillator2.connect(context2.destination);
-        oscillator2.start(context2.currentTime + start2);
-        oscillator2.stop(context2.currentTime + stop2);
-    }
+}
+
+function makeTwoSounds(waveform1, frequency1, start1, stop1, waveform2, frequency2, start2, stop2) {
+    let context = new(window.AudioContext || window.webkitAudioContext)();
+    let context2 = new(window.AudioContext || window.webkitAudioContext)();
+    let oscillator = context.createOscillator();
+    let oscillator2 = context2.createOscillator();
+    oscillator.type = waveform1;
+    oscillator.frequency.value = frequency1;
+    oscillator.connect(context.destination);
+    oscillator.start(start1);
+    oscillator.stop(context.currentTime + stop1);
+    oscillator2.type = waveform2;
+    oscillator2.frequency.value = frequency2;
+    oscillator2.connect(context2.destination);
+    oscillator2.start(context2.currentTime + start2);
+    oscillator2.stop(context2.currentTime + stop2);
 }
 
 function buzzBeep() {
@@ -201,11 +214,11 @@ function lossBeep() {
 }
 
 function winBeep() {
-    makeSound("sine", 660, 0, 0.05, "sine", 880, 0.07, 0.2);
+    makeTwoSounds("sine", 660, 0, 0.05, "sine", 880, 0.07, 0.2);
 }
 
 function bigWinBeep() {
-    makeSound("sine", 440, 0, 0.15, "sine", 880, 0.2, 1.5);
+    makeTwoSounds("sine", 440, 0, 0.15, "sine", 880, 0.2, 1.5);
 }
 
 function announceTheEnd() {
@@ -228,14 +241,20 @@ function playGame() { // this does some initializing, gets the corresponding-yea
     updateGuessesRemaining();
     // put the name into an array so we can deal with the letters separately, set up arrays for the letters that match (the main gameplay display) and the letters guessed including blanks for the remaining guesses (this goes to the secondary gameplay display)
     theWordToGuessArray = theWordToGuess.split("");
-    for (var count = 0; count < theWordToGuess.length; count++) {
+    for (let count = 0; count < theWordToGuess.length; count++) {
         theLettersThatMatchArray.push("_");
         theLettersGuessedArray.push("_");
     }
 
-    // FIX - this is where an extra underscore gets in when difficulty is "hard"
-    for (var count = 0; count < theDifficultyLevel; count++) { // add a couple more underscores for the difficulty level
-        theLettersGuessedArray.push("_");
+    if (theDifficultyLevel > 0) {
+        for (let count = 0; count < theDifficultyLevel; count++) { // add a couple more underscores for the difficulty level
+            theLettersGuessedArray.push("_");
+        }
+    } else {
+        theNegativeDifficultyLevel = -theDifficultyLevel;
+        for (let count = 0; count < theNegativeDifficultyLevel; count++) { // remove underscores for the difficulty level
+            theLettersGuessedArray.pop();
+        }
     }
     console.log(theWordToGuess); // peek there if you want to cheat!
     updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
@@ -266,20 +285,20 @@ function respondToKeyPress() {
                         updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
                     }
                 }
+                shortWinBeep();
                 // then see if the word has been completed
                 if (!theLettersThatMatchArray.includes("_")) {
                     theWins = theWins + 1;
                     updateDisplay("displayArea", "You won that round!");
                     theWordsGuessedArray.push(theWordToGuess);
                     updateDisplaysExceptDisplayAndRemaining();
-                    makeGameNotActive();
                     if (allWordsToGuess.length === 0) { // if there are no more names to guess
                         announceTheEnd();
                     } else {
                         winBeep();
                     }
+                    makeGameNotActive();
                 }
-                shortWinBeep();
                 //if the guess is wrong then we decrement the guesses remaining
             } else {
                 theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 1, theKeyName.toLowerCase());
@@ -295,11 +314,11 @@ function respondToKeyPress() {
         theWordsGuessedArray.push(theWordToGuess);
         updateDisplay("displayArea", "No guesses left. It was '" + theWordToGuess + "'");
         updateDisplaysExceptDisplayAndRemaining();
-        makeGameNotActive();
         if (allWordsToGuess.length === 0) { // if there are no more names to guess
             announceTheEnd();
         } else {
             lossBeep();
         }
+        makeGameNotActive();
     }
 }
