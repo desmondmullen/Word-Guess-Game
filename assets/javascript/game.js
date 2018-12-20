@@ -32,7 +32,7 @@ if (theYearDisplay == null || theYearDisplay == "") { // if user cancels, go bac
 }
 
 let theShortPageBackground = "assets/images/" + theYearDisplay + ".jpg";
-let thePageBackground = "<img src=\"assets/images/" + theYearDisplay + ".jpg\" class=\"theBackgroundImage\">";
+let thePageBackground = "<img src=\"assets/images/" + theYearDisplay + ".jpg\" class=\"theBackgroundImage\" alt=\"newspaper front page\">";
 const allWordsReset = [...oneHundredYearsOfNamesObject[theYearDisplay]];
 const allWordsToGuess = [...allWordsReset];
 let theWordToGuess = "";
