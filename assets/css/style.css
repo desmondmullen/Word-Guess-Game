@@ -177,6 +177,15 @@ section#theGuessesRemaining {
     margin-bottom: 20px;
 }
 
+@media only screen and (min-width: 300px) and (max-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+    .displayArea {
+        font-size: large;
+    }
+    .theLettersGuessed {
+        font-size: medium;
+    }
+}
+
 .textCentered {
     position: relative;
     text-align: center;
