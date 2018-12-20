@@ -164,6 +164,60 @@ function updateGuessesRemaining() {
     updateDisplay("theGuessesRemaining", "<strong>Guesses remaining: </strong>" + theGuessesRemaining);
 }
 
+function buzzBeep() {
+    var context = new(window.AudioContext || window.webkitAudioContext)();
+    var oscillator = context.createOscillator();
+    oscillator.type = 'sawtooth';
+    oscillator.frequency.value = 60;
+    oscillator.connect(context.destination);
+    oscillator.start();
+    oscillator.stop(context.currentTime + 0.07);
+}
+
+function lossBeep() {
+    var context = new(window.AudioContext || window.webkitAudioContext)();
+    var oscillator = context.createOscillator();
+    oscillator.type = 'sawtooth';
+    oscillator.frequency.value = 50;
+    oscillator.connect(context.destination);
+    oscillator.start();
+    oscillator.stop(context.currentTime + 0.4);
+}
+
+function winBeep() {
+    var context = new(window.AudioContext || window.webkitAudioContext)();
+    var context2 = new(window.AudioContext || window.webkitAudioContext)();
+    var oscillator = context.createOscillator();
+    var oscillator2 = context2.createOscillator();
+    oscillator.type = 'sine';
+    oscillator.frequency.value = 660;
+    oscillator.connect(context.destination);
+    oscillator.start();
+    oscillator.stop(context.currentTime + 0.05);
+    oscillator2.type = 'sine';
+    oscillator2.frequency.value = 880;
+    oscillator2.connect(context2.destination);
+    oscillator2.start(context2.currentTime + 0.07);
+    oscillator2.stop(context2.currentTime + 1);
+}
+
+function bigWinBeep() {
+    var context = new(window.AudioContext || window.webkitAudioContext)();
+    var context2 = new(window.AudioContext || window.webkitAudioContext)();
+    var oscillator = context.createOscillator();
+    var oscillator2 = context2.createOscillator();
+    oscillator.type = 'sine';
+    oscillator.frequency.value = 440;
+    oscillator.connect(context.destination);
+    oscillator.start();
+    oscillator.stop(context.currentTime + 0.15);
+    oscillator2.type = 'sine';
+    oscillator2.frequency.value = 880;
+    oscillator2.connect(context2.destination);
+    oscillator2.start(context2.currentTime + 0.2);
+    oscillator2.stop(context2.currentTime + 1.5);
+}
+
 function playGame() { // this does some initializing, gets the corresponding-year picture in the background, and randomly selects the name to guess
     theGameIsActive = true;
     getDifficulty();
@@ -171,6 +225,7 @@ function playGame() { // this does some initializing, gets the corresponding-yea
     updateAllDisplays(); // we overwrite a couple of these below but this makes sure all our bases are covered
     if (allWordsToGuess.length === 0) { // if there are no more names to guess
         updateDisplay("displayArea", "<em>These are the top ten baby names of " + theYearDisplay + "!</em>");
+        bigWinBeep()
     } else { // otherwise we pick a name from the array based on a random number
         theRandomNumber = Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin;
         theWordToGuess = allWordsToGuess[theRandomNumber];
@@ -198,8 +253,9 @@ function playGame() { // this does some initializing, gets the corresponding-yea
 
 function respondToKeyPress() {
     if (theGuessesRemaining > 0) {
-        // if it is not a letter then we will do nothing (maybe beep?)
-        if (!allTheValidGuesses.includes(theKeyName.toLowerCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toLowerCase())) { //beep
+        // if it is not a letter then we will beep to indicate an error
+        if (!allTheValidGuesses.includes(theKeyName.toLowerCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toLowerCase())) {
+            buzzBeep()
         } else { // put the letter in place of an underscore in theLettersGuessedArray
             if (theWordToGuess.toLowerCase().includes(theKeyName.toLowerCase())) {
                 theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 0, theKeyName.toLowerCase());
@@ -222,8 +278,9 @@ function respondToKeyPress() {
                     theWins = theWins + 1;
                     updateDisplay("displayArea", "You won that round!");
                     theWordsGuessedArray.push(theWordToGuess);
-                    updateDisplaysExceptDisplayAndRemaining()
-                    makeGameNotActive()
+                    updateDisplaysExceptDisplayAndRemaining();
+                    makeGameNotActive();
+                    winBeep();
                 }
                 //if the guess is wrong then we decrement the guesses remaining
             } else {
@@ -240,5 +297,6 @@ function respondToKeyPress() {
         updateDisplay("displayArea", "No guesses left. It was '" + theWordToGuess + "'");
         updateDisplaysExceptDisplayAndRemaining();
         makeGameNotActive();
+        lossBeep();
     }
 }
