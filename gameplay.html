@@ -21,13 +21,13 @@
         <section id="displayArea" class="displayArea textCentered" onclick="focusOnHiddenTextField()"></section>
         <textarea id="hiddenTextField" class="hidden"></textarea>
         <p id="theLettersGuessed" class="theLettersGuessed textCentered"></p>
-        <span class="textCentered">
+        <section class="textCentered">
             <section id="theGuessesRemaining" class="inline"></section>
-            <section class="inline"><strong>Difficulty: </strong><input onclick="getDifficulty()" type="radio" name="difficulty" id="easyDifficulty" value="easy"><label for="easyDifficulty">Easy (word length + 4)</label><input onclick="getDifficulty()" type="radio" name="difficulty" id="standardDifficulty"
-                value="standard" checked="checked">
-            <label for="standardDifficulty">Standard (+ 2)</label>
-            <input onclick="getDifficulty()" type="radio" name="difficulty" id="hardDifficulty" value="hard"><label for="hardDifficulty" class="noRightMargin">Hard (-1)</label></section>
-        </span>
+            <section class="inline"><strong>Difficulty: </strong><input onclick="getDifficulty()" type="radio" name="difficulty" id="easyDifficulty" value="easy"><label for="easyDifficulty">Easy (word length + 4)</label><input onclick="getDifficulty()" type="radio" name="difficulty"
+                    id="standardDifficulty" value="standard" checked="checked">
+                <label for="standardDifficulty">Standard (+ 2)</label>
+                <input onclick="getDifficulty()" type="radio" name="difficulty" id="hardDifficulty" value="hard"><label for="hardDifficulty" class="noRightMargin">Hard (-1)</label></section>
+        </section>
         <br>
         <br>
         <p class="textCentered" id="theWins"></p>
