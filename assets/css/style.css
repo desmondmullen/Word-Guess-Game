@@ -184,6 +184,9 @@ section#theGuessesRemaining {
     .theLettersGuessed {
         font-size: medium;
     }
+    button {
+        margin: 0;
+    }
 }
 
 .textCentered {
