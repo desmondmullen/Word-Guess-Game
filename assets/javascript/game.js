@@ -19,13 +19,13 @@ window.onload = function windowLoad() {
 
 // the following starts gameplay in motion by asking for a year
 let theYearDisplay = Number(prompt("Please enter any year from 1918 to 2017 and guess the most popular names for that year:"));
-if (theYearDisplay === null) { // if user cancels, go back to start screen
+if (theYearDisplay == null || theYearDisplay == "") { // if user cancels, go back to start screen
     window.location.href = "index.html";
 } else { // if they haven't cancelled, check to see if it's a useable year
     if ((theYearDisplay > 2017 || theYearDisplay < 1918) && theYearDisplay != NaN) { // if not a useable number, we prompt again
         theYearDisplay = Number(prompt("Please enter a number from 1918 to 2017"));
     } else { // if the user cancelled or pressed OK with no number (may be text or nothing) in field
-        if (theYearDisplay > 2017 || theYearDisplay < 1918 || theYearDisplay === NaN || theYearDisplay === null) { // sounds like they don't want to play so we go back to the start screen
+        if (theYearDisplay > 2017 || theYearDisplay < 1918 || theYearDisplay == NaN || theYearDisplay == null || theYearDisplay == "") { // sounds like they don't want to play so we go back to the start screen
             window.location.href = "index.html";
         }
     }
@@ -198,7 +198,7 @@ function winBeep() {
     oscillator2.frequency.value = 880;
     oscillator2.connect(context2.destination);
     oscillator2.start(context2.currentTime + 0.07);
-    oscillator2.stop(context2.currentTime + 1);
+    oscillator2.stop(context2.currentTime + 0.2);
 }
 
 function bigWinBeep() {
@@ -218,36 +218,39 @@ function bigWinBeep() {
     oscillator2.stop(context2.currentTime + 1.5);
 }
 
+function announceTheEnd() {
+    updateDisplay("displayArea", "<em>These are the top ten baby names of " + theYearDisplay + "!</em>");
+    setFocus("startNewGame");
+    bigWinBeep();
+}
+
 function playGame() { // this does some initializing, gets the corresponding-year picture in the background, and randomly selects the name to guess
     theGameIsActive = true;
     getDifficulty();
     updateDisplay("backgroundImageHolder", thePageBackground);
     updateAllDisplays(); // we overwrite a couple of these below but this makes sure all our bases are covered
-    if (allWordsToGuess.length === 0) { // if there are no more names to guess
-        updateDisplay("displayArea", "<em>These are the top ten baby names of " + theYearDisplay + "!</em>");
-        bigWinBeep()
-    } else { // otherwise we pick a name from the array based on a random number
-        theRandomNumber = Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin;
-        theWordToGuess = allWordsToGuess[theRandomNumber];
-        // remove that name from our master list so it won't be repeated if someone plays again
-        allWordsToGuess.splice(theRandomNumber, 1);
-        randomMax = (allWordsToGuess.length - 1);
-        updateGuessesRemaining();
-        // put the name into an array so we can deal with the letters separately, set up arrays for the letters that match (the main gameplay display) and the letters guessed including blanks for the remaining guesses (this goes to the secondary gameplay display)
-        theWordToGuessArray = theWordToGuess.split("");
-        for (var count = 0; count < theWordToGuess.length; count++) {
-            theLettersThatMatchArray.push("_");
-            theLettersGuessedArray.push("_");
-        }
-
-        // FIX - this is where an extra underscore gets in when difficulty is "hard"
-        for (var count = 0; count < theDifficultyLevel; count++) { // add a couple more underscores for the difficulty level
-            theLettersGuessedArray.push("_");
-        }
-        console.log(theWordToGuess); // peek there if you want to cheat!
-        updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
-        updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "))
+    // we pick a name from the array based on a random number
+    theRandomNumber = Math.floor(Math.random() * (+randomMax - +randomMin)) + +randomMin;
+    theWordToGuess = allWordsToGuess[theRandomNumber];
+    // remove that name from our master list so it won't be repeated if someone plays again
+    allWordsToGuess.splice(theRandomNumber, 1);
+    randomMax = (allWordsToGuess.length - 1);
+    updateGuessesRemaining();
+    // put the name into an array so we can deal with the letters separately, set up arrays for the letters that match (the main gameplay display) and the letters guessed including blanks for the remaining guesses (this goes to the secondary gameplay display)
+    theWordToGuessArray = theWordToGuess.split("");
+    for (var count = 0; count < theWordToGuess.length; count++) {
+        theLettersThatMatchArray.push("_");
+        theLettersGuessedArray.push("_");
     }
+
+    // FIX - this is where an extra underscore gets in when difficulty is "hard"
+    for (var count = 0; count < theDifficultyLevel; count++) { // add a couple more underscores for the difficulty level
+        theLettersGuessedArray.push("_");
+    }
+    console.log(theWordToGuess); // peek there if you want to cheat!
+    updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
+    updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "))
+
     setFocus("hiddenTextField");
 }
 
@@ -280,7 +283,11 @@ function respondToKeyPress() {
                     theWordsGuessedArray.push(theWordToGuess);
                     updateDisplaysExceptDisplayAndRemaining();
                     makeGameNotActive();
-                    winBeep();
+                    if (allWordsToGuess.length === 0) { // if there are no more names to guess
+                        announceTheEnd()
+                    } else {
+                        winBeep();
+                    }
                 }
                 //if the guess is wrong then we decrement the guesses remaining
             } else {
@@ -297,6 +304,10 @@ function respondToKeyPress() {
         updateDisplay("displayArea", "No guesses left. It was '" + theWordToGuess + "'");
         updateDisplaysExceptDisplayAndRemaining();
         makeGameNotActive();
-        lossBeep();
+        if (allWordsToGuess.length === 0) { // if there are no more names to guess
+            announceTheEnd()
+        } else {
+            lossBeep();
+        }
     }
 }
