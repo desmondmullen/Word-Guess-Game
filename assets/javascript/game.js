@@ -164,58 +164,48 @@ function updateGuessesRemaining() {
     updateDisplay("theGuessesRemaining", "<strong>Guesses remaining: </strong>" + theGuessesRemaining);
 }
 
-function buzzBeep() {
+function makeSound(waveform1, frequency1, start1, stop1, waveform2, frequency2, start2, stop2) { // this is very basic sound generation but it's very flexible and doesn't require more files
     var context = new(window.AudioContext || window.webkitAudioContext)();
+    var context2 = new(window.AudioContext || window.webkitAudioContext)();
     var oscillator = context.createOscillator();
-    oscillator.type = 'sawtooth';
-    oscillator.frequency.value = 60;
+    var oscillator2 = context2.createOscillator();
+    oscillator.type = waveform1;
+    oscillator.frequency.value = frequency1;
     oscillator.connect(context.destination);
-    oscillator.start();
-    oscillator.stop(context.currentTime + 0.07);
+    oscillator.start(start1);
+    oscillator.stop(context.currentTime + stop1);
+    if (waveform2 != "") {
+        oscillator2.type = waveform2;
+        oscillator2.frequency.value = frequency2;
+        oscillator2.connect(context2.destination);
+        oscillator2.start(context2.currentTime + start2);
+        oscillator2.stop(context2.currentTime + stop2);
+    }
 }
 
+function buzzBeep() {
+    makeSound("sawtooth", 60, 0, 0.07);
+}
+
+function shortBuzzBeep() {
+    makeSound("sawtooth", 60, 0, 0.03);
+}
+
+function shortWinBeep() {
+    makeSound("sine", 220, 0, 0.03);
+}
+
+
 function lossBeep() {
-    var context = new(window.AudioContext || window.webkitAudioContext)();
-    var oscillator = context.createOscillator();
-    oscillator.type = 'sawtooth';
-    oscillator.frequency.value = 50;
-    oscillator.connect(context.destination);
-    oscillator.start();
-    oscillator.stop(context.currentTime + 0.4);
+    makeSound("sawtooth", 50, 0, 0.4);
 }
 
 function winBeep() {
-    var context = new(window.AudioContext || window.webkitAudioContext)();
-    var context2 = new(window.AudioContext || window.webkitAudioContext)();
-    var oscillator = context.createOscillator();
-    var oscillator2 = context2.createOscillator();
-    oscillator.type = 'sine';
-    oscillator.frequency.value = 660;
-    oscillator.connect(context.destination);
-    oscillator.start();
-    oscillator.stop(context.currentTime + 0.05);
-    oscillator2.type = 'sine';
-    oscillator2.frequency.value = 880;
-    oscillator2.connect(context2.destination);
-    oscillator2.start(context2.currentTime + 0.07);
-    oscillator2.stop(context2.currentTime + 0.2);
+    makeSound("sine", 660, 0, 0.05, "sine", 880, 0.07, 0.2);
 }
 
 function bigWinBeep() {
-    var context = new(window.AudioContext || window.webkitAudioContext)();
-    var context2 = new(window.AudioContext || window.webkitAudioContext)();
-    var oscillator = context.createOscillator();
-    var oscillator2 = context2.createOscillator();
-    oscillator.type = 'sine';
-    oscillator.frequency.value = 440;
-    oscillator.connect(context.destination);
-    oscillator.start();
-    oscillator.stop(context.currentTime + 0.15);
-    oscillator2.type = 'sine';
-    oscillator2.frequency.value = 880;
-    oscillator2.connect(context2.destination);
-    oscillator2.start(context2.currentTime + 0.2);
-    oscillator2.stop(context2.currentTime + 1.5);
+    makeSound("sine", 440, 0, 0.15, "sine", 880, 0.2, 1.5);
 }
 
 function announceTheEnd() {
@@ -249,7 +239,7 @@ function playGame() { // this does some initializing, gets the corresponding-yea
     }
     console.log(theWordToGuess); // peek there if you want to cheat!
     updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
-    updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "))
+    updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
 
     setFocus("hiddenTextField");
 }
@@ -258,7 +248,7 @@ function respondToKeyPress() {
     if (theGuessesRemaining > 0) {
         // if it is not a letter then we will beep to indicate an error
         if (!allTheValidGuesses.includes(theKeyName.toLowerCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toLowerCase())) {
-            buzzBeep()
+            buzzBeep();
         } else { // put the letter in place of an underscore in theLettersGuessedArray
             if (theWordToGuess.toLowerCase().includes(theKeyName.toLowerCase())) {
                 theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 0, theKeyName.toLowerCase());
@@ -284,11 +274,12 @@ function respondToKeyPress() {
                     updateDisplaysExceptDisplayAndRemaining();
                     makeGameNotActive();
                     if (allWordsToGuess.length === 0) { // if there are no more names to guess
-                        announceTheEnd()
+                        announceTheEnd();
                     } else {
                         winBeep();
                     }
                 }
+                shortWinBeep();
                 //if the guess is wrong then we decrement the guesses remaining
             } else {
                 theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 1, theKeyName.toLowerCase());
@@ -296,6 +287,7 @@ function respondToKeyPress() {
                 theGuessesRemaining = theGuessesRemaining - 1;
                 theMessage = "Guesses remaining: " + theGuessesRemaining;
                 document.getElementById("theGuessesRemaining").innerHTML = theMessage;
+                shortBuzzBeep();
             }
         }
     } // if user has run out of guesses, we end up here
@@ -305,7 +297,7 @@ function respondToKeyPress() {
         updateDisplaysExceptDisplayAndRemaining();
         makeGameNotActive();
         if (allWordsToGuess.length === 0) { // if there are no more names to guess
-            announceTheEnd()
+            announceTheEnd();
         } else {
             lossBeep();
         }

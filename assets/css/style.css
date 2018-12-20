@@ -13,19 +13,12 @@ body {
     position: relative;
 }
 
-.newspapers {
-    position: fixed;
-    height: 100vh;
-    margin: 1px;
-    padding: 1px;
+.theBackgroundImage {
+    position: absolute;
+    max-width: 100vw;
+    min-width: 100vw;
+    opacity: 0.25;
     z-index: -99;
-}
-
-.baby {
-    position: fixed;
-    top: 5%;
-    left: 5%;
-    z-index: 99;
 }
 
 .startScreenTextHolder {
@@ -39,6 +32,22 @@ body {
     background: linear-gradient(to bottom left, deepskyblue, transparent), linear-gradient(to bottom right, deeppink, transparent), linear-gradient(to top, snow, transparent);
     background-blend-mode: screen;
     z-index: 100;
+}
+
+.newspapers {
+    /*start screen background*/
+    position: fixed;
+    height: 100vh;
+    margin: 1px;
+    padding: 1px;
+    z-index: -99;
+}
+
+.baby {
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    z-index: 99;
 }
 
 p.startScreen {
@@ -65,18 +74,10 @@ p.startScreen {
     }
 }
 
-.theBackgroundImage {
-    position: absolute;
-    max-width: 100vw;
-    min-width: 100vw;
-    opacity: 0.25;
-    z-index: -99;
-}
-
 .bodyContent {
+    /*in gameplay*/
     position: fixed;
     z-index: 99;
-    /* background-color: snow; */
     background: linear-gradient(to bottom left, deepskyblue, transparent), linear-gradient(to bottom right, deeppink, transparent), linear-gradient(to top, snow, transparent);
     background-blend-mode: screen;
     width: 60%;
@@ -151,6 +152,7 @@ section#theGuessesRemaining {
 }
 
 .hidden {
+    /*this allows gameplay on iOS by getting the keyboard to come up*/
     opacity: 0;
     position: relative;
     border: 0;
@@ -161,6 +163,7 @@ section#theGuessesRemaining {
 }
 
 .displayArea {
+    /*in gameplay*/
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     font-size: xx-large;
