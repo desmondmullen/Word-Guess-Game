@@ -185,6 +185,9 @@ section#theGuessesRemaining {
     h1 {
         font-size: large;
     }
+    p.animateText {
+        display: none;
+    }
     .displayArea {
         font-size: large;
     }
