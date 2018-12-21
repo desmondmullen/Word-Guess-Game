@@ -177,7 +177,7 @@ section#theGuessesRemaining {
     margin-bottom: 20px;
 }
 
-@media only screen and (min-width: 300px) and (max-width: 670px) {
+@media only screen and (max-width: 670px) {
     /* @media only screen and (min-width: 300px) and (max-width: 670px) and (-webkit-min-device-pixel-ratio: 2) { */
     .displayArea {
         font-size: large;
