@@ -182,8 +182,12 @@ section#theGuessesRemaining {
     body {
         font-size: medium;
     }
+    .bodyContent {
+        /*in gameplay*/
+        position: relative;
+    }
     h1 {
-        font-size: large;
+        font-size: medium;
     }
     p.animateText {
         display: none;
@@ -196,7 +200,7 @@ section#theGuessesRemaining {
     }
     button {
         margin: 0;
-        font-size: medium;
+        font-size: small;
     }
 }
 
