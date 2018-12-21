@@ -179,6 +179,12 @@ section#theGuessesRemaining {
 
 @media only screen and (max-width: 670px) {
     /* @media only screen and (min-width: 300px) and (max-width: 670px) and (-webkit-min-device-pixel-ratio: 2) { */
+    body {
+        font-size: medium;
+    }
+    h1 {
+        font-size: large;
+    }
     .displayArea {
         font-size: large;
     }
@@ -187,6 +193,7 @@ section#theGuessesRemaining {
     }
     button {
         margin: 0;
+        font-size: medium;
     }
 }
 
