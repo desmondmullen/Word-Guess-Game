@@ -206,6 +206,7 @@ section#theGuessesRemaining {
     .theLettersGuessed {
         font-size: medium;
     }
+    label,
     .smallForMobile {
         margin: 0;
         font-size: small;
