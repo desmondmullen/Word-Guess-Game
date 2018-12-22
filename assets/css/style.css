@@ -206,6 +206,10 @@ section#theGuessesRemaining {
     .theLettersGuessed {
         font-size: medium;
     }
+    .radioButtons {
+        margin: 0;
+        font-size: small;
+    }
     button {
         margin: 0;
         font-size: small;
