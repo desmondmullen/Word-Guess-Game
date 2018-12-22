@@ -188,6 +188,7 @@ section#theGuessesRemaining {
     .bodyContent {
         /*in gameplay*/
         position: relative;
+        width: 100%;
     }
     .startScreenTextHolder {
         position: static;
@@ -214,6 +215,15 @@ section#theGuessesRemaining {
     }
     section.bottomOfWindow {
         display: none;
+    }
+    .halfWidth {
+        padding: 0;
+        width: 50%;
+    }
+    ul {
+        margin-left: 0;
+        list-style-position: inside;
+        text-align: left;
     }
 }
 
