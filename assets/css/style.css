@@ -190,10 +190,8 @@ section#theGuessesRemaining {
         position: relative;
     }
     .startScreenTextHolder {
-        position: relative;
+        position: static;
         width: 100%;
-        top: 0;
-        left: 0;
     }
     h1 {
         font-size: medium;
