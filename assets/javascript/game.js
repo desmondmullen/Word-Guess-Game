@@ -257,7 +257,6 @@ function playGame() { // this does some initializing, gets the corresponding-yea
     console.log(theWordToGuess); // peek there if you want to cheat!
     updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
-
     setFocus("hiddenTextField");
 }
 
@@ -283,7 +282,7 @@ function respondToKeyPress() {
                         updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
                     }
                 }
-                shortWinBeep();
+                // shortWinBeep();
                 // then see if the word has been completed
                 if (!theLettersThatMatchArray.includes("_")) {
                     theWins = theWins + 1;
