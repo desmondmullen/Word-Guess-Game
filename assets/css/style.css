@@ -234,6 +234,7 @@ section#theGuessesRemaining {
         display: none;
     }
     label,
+    section,
     .smallForMobile {
         margin: 0;
         font-size: small;
