@@ -222,8 +222,6 @@ section#theGuessesRemaining {
     }
     ul {
         margin-left: 0;
-        list-style-position: inside;
-        text-align: left;
     }
 }
 
