@@ -206,11 +206,6 @@ section#theGuessesRemaining {
     .theLettersGuessed {
         font-size: medium;
     }
-    label,
-    .smallForMobile {
-        margin: 0;
-        font-size: small;
-    }
     button {
         margin: 0;
         font-size: small;
@@ -225,6 +220,10 @@ section#theGuessesRemaining {
         padding: 0;
         width: 50%;
     }
+    .halfWidthWrapper {
+        padding: 0;
+        margin 0;
+    }
     ul {
         margin-left: 0;
     }
@@ -233,6 +232,11 @@ section#theGuessesRemaining {
     }
     .hiddenOnMobile {
         display: none;
+    }
+    label,
+    .smallForMobile {
+        margin: 0;
+        font-size: small;
     }
 }
 
