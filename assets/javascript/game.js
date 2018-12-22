@@ -225,6 +225,16 @@ function announceTheEnd() {
     bigWinBeep();
 }
 
+function updateTheWordToGuessAndGuesses() {
+    if (window.matchMedia("(max-width: 670px)").matches) {
+        updateDisplay("displayArea", "<p>The name to guess:</p>" + theLettersThatMatchArray.join(" "));
+        updateDisplay("theLettersGuessed", "<p>Letters guessed:</p>" + theLettersGuessedArray.join(" "));
+    } else {
+        updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
+        updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
+    }
+}
+
 function playGame() { // this does some initializing, gets the corresponding-year picture in the background, and randomly selects the name to guess
     theGameIsActive = true;
     getDifficulty();
@@ -255,17 +265,14 @@ function playGame() { // this does some initializing, gets the corresponding-yea
         }
     }
     console.log(theWordToGuess); // peek there if you want to cheat!
-    if (window.matchMedia("(max-width: 670px)")) {
-        // updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
-        // updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
-        updateDisplay("displayArea", "<p>The name to guess:</p>" + theLettersThatMatchArray.join(" "));
-        updateDisplay("theLettersGuessed", "<p>Letters guessed:</p>" + theLettersGuessedArray.join(" "));
-    } else {
-        // updateDisplay("displayArea", "<p>The name to guess:</p>" + theLettersThatMatchArray.join(" "));
-        // updateDisplay("theLettersGuessed", "<p>Letters guessed:</p>" + theLettersGuessedArray.join(" "));
-        updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
-        updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
-    }
+    updateTheWordToGuessAndGuesses();
+    // if (window.matchMedia("(max-width: 670px)").matches) {
+    //     updateDisplay("displayArea", "<p>The name to guess:</p>" + theLettersThatMatchArray.join(" "));
+    //     updateDisplay("theLettersGuessed", "<p>Letters guessed:</p>" + theLettersGuessedArray.join(" "));
+    // } else {
+    //     updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
+    //     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
+    // }
     setFocus("hiddenTextField");
 }
 
