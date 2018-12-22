@@ -191,7 +191,7 @@ section#theGuessesRemaining {
         width: 100%;
     }
     .startScreenTextHolder {
-        position: static;
+        position: relative;
         width: 100%;
     }
     h1 {
