@@ -182,12 +182,18 @@ section#theGuessesRemaining {
     body {
         font-size: medium;
     }
+    .backgroundImageHolder {
+        display: none;
+    }
     .bodyContent {
         /*in gameplay*/
         position: relative;
     }
     .startScreenTextHolder {
         position: relative;
+        width: 100%;
+        top: 0;
+        left: 0;
     }
     h1 {
         font-size: medium;
@@ -205,34 +211,47 @@ section#theGuessesRemaining {
         margin: 0;
         font-size: small;
     }
-    .textCentered {
-        position: relative;
-        text-align: center;
+    button.bottomOfWindow {
+        display: none;
     }
-    .italic {
-        font-style: italic;
+    section.bottomOfWindow {
+        display: none;
     }
-    strong {
-        font-weight: bold;
-    }
-    .halfWidth {
-        display: inline-block;
-        width: 45%;
-    }
-    .halfWidth.girl {
-        /* background-color: deeppink; */
-        background: linear-gradient(to bottom, deeppink, transparent), linear-gradient(to top, snow, transparent);
-        background-blend-mode: screen;
-        float: left;
-    }
-    .halfWidth.boy {
-        /* background-color: deepskyblue; */
-        background: linear-gradient(to bottom, deepskyblue, transparent), linear-gradient(to top, snow, transparent);
-        background-blend-mode: screen;
-        float: right;
-    }
-    .contentCentered {
-        width: 100%;
-        text-align: center;
-    }
+}
+
+.textCentered {
+    position: relative;
+    text-align: center;
+}
+
+.italic {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.halfWidth {
+    display: inline-block;
+    width: 45%;
+}
+
+.halfWidth.girl {
+    /* background-color: deeppink; */
+    background: linear-gradient(to bottom, deeppink, transparent), linear-gradient(to top, snow, transparent);
+    background-blend-mode: screen;
+    float: left;
+}
+
+.halfWidth.boy {
+    /* background-color: deepskyblue; */
+    background: linear-gradient(to bottom, deepskyblue, transparent), linear-gradient(to top, snow, transparent);
+    background-blend-mode: screen;
+    float: right;
+}
+
+.contentCentered {
+    width: 100%;
+    text-align: center;
 }
