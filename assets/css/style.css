@@ -223,6 +223,9 @@ section#theGuessesRemaining {
     ul {
         margin-left: 0;
     }
+    .textCentered {
+        font-size: medium;
+    }
 }
 
 .textCentered {
