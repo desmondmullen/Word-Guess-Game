@@ -226,6 +226,9 @@ section#theGuessesRemaining {
     .textCentered {
         font-size: medium;
     }
+    .hiddenOnMobile {
+        display: none;
+    }
 }
 
 .textCentered {
