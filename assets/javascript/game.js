@@ -282,7 +282,6 @@ function respondToKeyPress() {
                         updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
                     }
                 }
-                // shortWinBeep();
                 // then see if the word has been completed
                 if (!theLettersThatMatchArray.includes("_")) {
                     theWins = theWins + 1;
@@ -295,6 +294,8 @@ function respondToKeyPress() {
                         winBeep();
                     }
                     makeGameNotActive();
+                } else {
+                    shortWinBeep();
                 }
                 //if the guess is wrong then we decrement the guesses remaining
             } else {
