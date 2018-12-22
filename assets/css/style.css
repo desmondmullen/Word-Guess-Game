@@ -202,6 +202,7 @@ section#theGuessesRemaining {
     }
     .displayArea {
         font-size: large;
+        margin-bottom: 0;
     }
     .theLettersGuessed {
         font-size: medium;
@@ -215,6 +216,9 @@ section#theGuessesRemaining {
     }
     section.bottomOfWindow {
         display: none;
+    }
+    section.inline {
+        font-size: small;
     }
     .halfWidth {
         padding: 0;
@@ -233,8 +237,9 @@ section#theGuessesRemaining {
     .hiddenOnMobile {
         display: none;
     }
-    label,
-    section,
+    label {
+        margin: 0;
+    }
     .smallForMobile {
         margin: 0;
         font-size: small;
