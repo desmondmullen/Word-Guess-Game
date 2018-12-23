@@ -239,9 +239,9 @@ strong {
     h1 {
         font-size: medium;
     }
-    p.animateText {
+    /* p.animateText {
         display: none;
-    }
+    } */
     .displayArea {
         font-size: large;
         margin-top: 40px;
