@@ -75,7 +75,7 @@ function makeGameNotActive() {
     return;
 }
 
-document.addEventListener("keypress", (event) => {
+document.addEventListener("keyup", (event) => {
     theKeyName = event.key;
     if (event.key === "Enter") {
         if (document.activeElement !== document.getElementById("playAgain")) {
