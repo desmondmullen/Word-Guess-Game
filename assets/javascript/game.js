@@ -87,7 +87,6 @@ document.addEventListener("keyup", (event) => {
         }
     } else {
         if (theGameIsActive) {
-            alert(theKeyName);
             respondToKeyUp();
         }
     }
