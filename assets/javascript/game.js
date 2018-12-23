@@ -179,7 +179,7 @@ function updateTheLettersGuessed() {
     if (window.matchMedia("(max-width: 670px)").matches) {
         updateDisplay("theLettersGuessed", "<p>Letters guessed:</p>" + theLettersGuessedArray.join(" "));
     } else {
-        updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
+        updateDisplay("theLettersGuessed", "Letters guessed:" + theLettersGuessedArray.join(" "));
     }
 }
 
