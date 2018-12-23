@@ -248,6 +248,7 @@ strong {
     }
     .theLettersGuessed {
         font-size: medium;
+        margin-bottom: 20px;
     }
     button {
         margin: 0;
