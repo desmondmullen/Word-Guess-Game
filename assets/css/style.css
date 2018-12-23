@@ -54,6 +54,19 @@ p.startScreen {
     padding: 20px;
 }
 
+.bodyContent {
+    /*in gameplay*/
+    position: fixed;
+    z-index: 99;
+    background: linear-gradient(to bottom left, deepskyblue, transparent), linear-gradient(to bottom right, deeppink, transparent), linear-gradient(to top, snow, transparent);
+    background-blend-mode: screen;
+    width: 60%;
+    left: 50%;
+    margin-left: -30%;
+    padding: 20px;
+    top: 10%;
+}
+
 .animateText {
     opacity: 0;
     font-style: italic;
@@ -74,17 +87,18 @@ p.startScreen {
     }
 }
 
-.bodyContent {
+.displayArea {
     /*in gameplay*/
-    position: fixed;
-    z-index: 99;
-    background: linear-gradient(to bottom left, deepskyblue, transparent), linear-gradient(to bottom right, deeppink, transparent), linear-gradient(to top, snow, transparent);
-    background-blend-mode: screen;
-    width: 60%;
-    left: 50%;
-    margin-left: -30%;
-    padding: 20px;
-    top: 10%;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: xx-large;
+    margin-bottom: 20px;
+}
+
+.theLettersGuessed {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-large;
+    margin-bottom: 20px;
 }
 
 h1 {
@@ -162,19 +176,41 @@ section#theGuessesRemaining {
     z-index: -11;
 }
 
-.displayArea {
-    /*in gameplay*/
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    font-size: xx-large;
-    margin-bottom: 20px;
+.textCentered {
+    position: relative;
+    text-align: center;
 }
 
-.theLettersGuessed {
-    font-family: 'Courier New', Courier, monospace;
-    /* font-weight: bold; */
-    font-size: x-large;
-    margin-bottom: 20px;
+.contentCentered {
+    width: 100%;
+    text-align: center;
+}
+
+.italic {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.halfWidth {
+    display: inline-block;
+    width: 45%;
+}
+
+.halfWidth.girl {
+    /* background-color: deeppink; */
+    background: linear-gradient(to bottom, deeppink, transparent), linear-gradient(to top, snow, transparent);
+    background-blend-mode: screen;
+    float: left;
+}
+
+.halfWidth.boy {
+    /* background-color: deepskyblue; */
+    background: linear-gradient(to bottom, deepskyblue, transparent), linear-gradient(to top, snow, transparent);
+    background-blend-mode: screen;
+    float: right;
 }
 
 @media only screen and (max-width: 670px) {
@@ -250,41 +286,4 @@ section#theGuessesRemaining {
         margin: 0;
         font-size: small;
     }
-}
-
-.textCentered {
-    position: relative;
-    text-align: center;
-}
-
-.italic {
-    font-style: italic;
-}
-
-strong {
-    font-weight: bold;
-}
-
-.halfWidth {
-    display: inline-block;
-    width: 45%;
-}
-
-.halfWidth.girl {
-    /* background-color: deeppink; */
-    background: linear-gradient(to bottom, deeppink, transparent), linear-gradient(to top, snow, transparent);
-    background-blend-mode: screen;
-    float: left;
-}
-
-.halfWidth.boy {
-    /* background-color: deepskyblue; */
-    background: linear-gradient(to bottom, deepskyblue, transparent), linear-gradient(to top, snow, transparent);
-    background-blend-mode: screen;
-    float: right;
-}
-
-.contentCentered {
-    width: 100%;
-    text-align: center;
 }

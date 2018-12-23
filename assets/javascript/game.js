@@ -22,7 +22,7 @@ if (theYearDisplay == null || theYearDisplay == "") { // if user cancels, go bac
 } else { // if they haven't cancelled, check to see if it's a useable year
     if ((theYearDisplay > 2017 || theYearDisplay < 1918) && theYearDisplay != NaN) { // if not a useable number, we prompt again
         theYearDisplay = Number(prompt("Please enter a number from 1918 to 2017"));
-    } else { // if the user cancelled or pressed OK with no number (may be text or nothing) in field
+    } else { // if the user cancelled or clicked OK with no number (may be text or nothing) in field
         if (theYearDisplay > 2017 || theYearDisplay < 1918 || theYearDisplay == NaN || theYearDisplay == null || theYearDisplay == "") { // sounds like they don't want to play so we go back to the start screen
             window.location.href = "index.html";
         }
@@ -83,7 +83,7 @@ document.addEventListener("keyup", (event) => {
         }
     } else {
         if (theGameIsActive) {
-            respondToKeyPress();
+            respondToKeyUp();
         }
     }
 });
@@ -268,7 +268,7 @@ function playGame() { // this does some initializing, gets the corresponding-yea
     setFocus("hiddenTextField");
 }
 
-function respondToKeyPress() {
+function respondToKeyUp() {
     if (theGuessesRemaining > 0) {
         // if it is not a letter then we will beep to indicate an error
         if (!allTheValidGuesses.includes(theKeyName.toLowerCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toLowerCase())) {
@@ -317,7 +317,7 @@ function respondToKeyPress() {
                 }
             }
         }
-    } // if user has run out of guesses, we end up here
+    } // we end up here every time we respond to a keyup
     if (theGuessesRemaining === 0) {
         theWordsGuessedArray.push(theWordToGuess);
         updateDisplay("displayArea", "No guesses left. It was '" + theWordToGuess + "'");
