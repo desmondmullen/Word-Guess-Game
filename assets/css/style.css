@@ -189,13 +189,16 @@ section#theGuessesRemaining {
         /*in gameplay*/
         position: relative;
         width: 100%;
-        left: ;
-        margin-left: 0;
         top: 0;
+        left: 0;
+        margin-left: 0;
     }
     .startScreenTextHolder {
         position: relative;
         width: 100%;
+        top: 0;
+        left: 0;
+        margin-left: 0;
     }
     h1 {
         font-size: medium;
