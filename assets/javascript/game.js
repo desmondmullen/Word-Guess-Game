@@ -52,6 +52,10 @@ let theTopFiveBoyNamesArray = ["1: ", "2: ", "3: ", "4: ", "5: "];
 let theIndex = 0;
 let theGameIsActive = false;
 
+if (window.matchMedia("(max-width: 670px)").matches) {
+    alert("If your keyboard is not showing on screen, simply click where it says 'The name to guess' to bring up the keyboard.");
+}
+
 function getDifficulty() { // check the radio buttons and update the difficulty level. The (word length + difficulty level) = the number of guesses the user gets.
     if (document.getElementById("easyDifficulty").checked) {
         theDifficultyLevel = 4;
