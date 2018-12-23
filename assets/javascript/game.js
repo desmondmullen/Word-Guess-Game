@@ -165,6 +165,16 @@ function updateGuessesRemaining() {
     updateDisplay("theGuessesRemaining", "<strong>Guesses remaining: </strong>" + theGuessesRemaining);
 }
 
+function updateTheWordToGuessAndGuesses() {
+    if (window.matchMedia("(max-width: 670px)").matches) {
+        updateDisplay("displayArea", "<p>The name to guess:</p>" + theLettersThatMatchArray.join(" "));
+        updateDisplay("theLettersGuessed", "<p>Letters guessed:</p>" + theLettersGuessedArray.join(" "));
+    } else {
+        updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
+        updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
+    }
+}
+
 function makeSound(waveform1, frequency1, start1, stop1) { // this is very basic sound generation but it's very flexible and doesn't require more files
     let context = new(window.AudioContext || window.webkitAudioContext)();
     let context2 = new(window.AudioContext || window.webkitAudioContext)();
@@ -225,16 +235,6 @@ function announceTheEnd() {
     bigWinBeep();
 }
 
-function updateTheWordToGuessAndGuesses() {
-    if (window.matchMedia("(max-width: 670px)").matches) {
-        updateDisplay("displayArea", "<p>The name to guess:</p>" + theLettersThatMatchArray.join(" "));
-        updateDisplay("theLettersGuessed", "<p>Letters guessed:</p>" + theLettersGuessedArray.join(" "));
-    } else {
-        updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
-        updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
-    }
-}
-
 function playGame() { // this does some initializing, gets the corresponding-year picture in the background, and randomly selects the name to guess
     theGameIsActive = true;
     getDifficulty();
@@ -266,13 +266,6 @@ function playGame() { // this does some initializing, gets the corresponding-yea
     }
     console.log(theWordToGuess); // peek there if you want to cheat!
     updateTheWordToGuessAndGuesses();
-    // if (window.matchMedia("(max-width: 670px)").matches) {
-    //     updateDisplay("displayArea", "<p>The name to guess:</p>" + theLettersThatMatchArray.join(" "));
-    //     updateDisplay("theLettersGuessed", "<p>Letters guessed:</p>" + theLettersGuessedArray.join(" "));
-    // } else {
-    //     updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
-    //     updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
-    // }
     setFocus("hiddenTextField");
 }
 
@@ -320,7 +313,9 @@ function respondToKeyPress() {
                 theGuessesRemaining = theGuessesRemaining - 1;
                 theMessage = "Guesses remaining: " + theGuessesRemaining;
                 document.getElementById("theGuessesRemaining").innerHTML = theMessage;
-                shortBuzzBeep();
+                if (theGuessesRemaining !== 0) {
+                    shortBuzzBeep();
+                }
             }
         }
     } // if user has run out of guesses, we end up here
