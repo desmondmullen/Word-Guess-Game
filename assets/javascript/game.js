@@ -164,7 +164,6 @@ function updateTopFiveDisplays() { // updates the top-five girls and the top-fiv
 }
 
 function updateGuessesRemaining() {
-    theGuessesRemaining = theWordToGuess.length + theDifficultyLevel;
     updateDisplay("theGuessesRemaining", "<strong>Guesses remaining: </strong>" + theGuessesRemaining);
 }
 
@@ -254,6 +253,7 @@ function playGame() { // this does some initializing, gets the corresponding-yea
     // remove that name from our master list so it won't be repeated if someone plays again
     allWordsToGuess.splice(theRandomNumber, 1);
     randomMax = (allWordsToGuess.length - 1);
+    theGuessesRemaining = theWordToGuess.length + theDifficultyLevel;
     updateGuessesRemaining();
     // put the name into an array so we can deal with the letters separately, set up arrays for the letters that match (the main gameplay display) and the letters guessed including blanks for the remaining guesses (this goes to the secondary gameplay display)
     theWordToGuessArray = theWordToGuess.split("");
