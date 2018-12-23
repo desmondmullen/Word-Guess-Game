@@ -239,17 +239,17 @@ strong {
     h1 {
         font-size: medium;
     }
-    /* p.animateText {
-        display: none;
-    } */
+    p.animateText {
+        margin-top: 20px;
+    }
     .displayArea {
         font-size: large;
-        margin-top: 40px;
+        margin-top: 10px;
         margin-bottom: 0;
     }
     .theLettersGuessed {
         font-size: medium;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
     button {
         margin: 0;
