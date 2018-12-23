@@ -216,7 +216,6 @@ function shortWinBeep() {
     makeSound("sine", 220, 0, 0.03);
 }
 
-
 function lossBeep() {
     makeSound("sawtooth", 50, 0, 0.4);
 }
@@ -313,7 +312,7 @@ function respondToKeyPress() {
                 theGuessesRemaining = theGuessesRemaining - 1;
                 theMessage = "Guesses remaining: " + theGuessesRemaining;
                 document.getElementById("theGuessesRemaining").innerHTML = theMessage;
-                if (theGuessesRemaining !== 0) {
+                if (theGuessesRemaining !== 0) { // this If is here because audioContext on Safari on iOS causes game to not get past shortBuzzBeep and on to the next If.
                     shortBuzzBeep();
                 }
             }

@@ -189,6 +189,9 @@ section#theGuessesRemaining {
         /*in gameplay*/
         position: relative;
         width: 100%;
+        left: ;
+        margin-left: 0;
+        top: 0;
     }
     .startScreenTextHolder {
         position: relative;
