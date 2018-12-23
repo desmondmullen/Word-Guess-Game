@@ -9,10 +9,9 @@
 
 
 // one hundred years of names copied from https://www.ssa.gov/oact/babynames/top5names.html saved as a tab-delimited file, and processed using /processSSNames.html which produced the copy-and-paste, fully punctuated object below.
-const oneHundredYearsOfNamesObject = { 2017: ["Emma", "Olivia", "Ava", "Isabella", "Sophia", "Liam", "Noah", "William", "James", "Logan"], 2016: ["Emma", "Olivia", "Ava", "Sophia", "Isabella", "Noah", "Liam", "William", "Mason", "James"], 2015: ["Emma", "Olivia", "Sophia", "Ava", "Isabella", "Noah", "Liam", "Mason", "Jacob", "William"], 2014: ["Emma", "Olivia", "Sophia", "Isabella", "Ava", "Noah", "Liam", "Mason", "Jacob", "William"], 2013: ["Sophia", "Emma", "Olivia", "Isabella", "Ava", "Noah", "Jacob", "Liam", "Mason", "William"], 2012: ["Sophia", "Emma", "Isabella", "Olivia", "Ava", "Jacob", "Mason", "Ethan", "Noah", "William"], 2011: ["Sophia", "Isabella", "Emma", "Olivia", "Ava", "Jacob", "Mason", "William", "Jayden", "Noah"], 2010: ["Isabella", "Sophia", "Emma", "Olivia", "Ava", "Jacob", "Ethan", "Michael", "Jayden", "William"], 2009: ["Isabella", "Emma", "Olivia", "Sophia", "Ava", "Jacob", "Ethan", "Michael", "Alexander", "William"], 2008: ["Emma", "Isabella", "Emily", "Olivia", "Ava", "Jacob", "Michael", "Ethan", "Joshua", "Daniel"], 2007: ["Emily", "Isabella", "Emma", "Ava", "Madison", "Jacob", "Michael", "Ethan", "Joshua", "Daniel"], 2006: ["Emily", "Emma", "Madison", "Isabella", "Ava", "Jacob", "Michael", "Joshua", "Ethan", "Matthew"], 2005: ["Emily", "Emma", "Madison", "Abigail", "Olivia", "Jacob", "Michael", "Joshua", "Matthew", "Ethan"], 2004: ["Emily", "Emma", "Madison", "Olivia", "Hannah", "Jacob", "Michael", "Joshua", "Matthew", "Ethan"], 2003: ["Emily", "Emma", "Madison", "Hannah", "Olivia", "Jacob", "Michael", "Joshua", "Matthew", "Andrew"], 2002: ["Emily", "Madison", "Hannah", "Emma", "Alexis", "Jacob", "Michael", "Joshua", "Matthew", "Ethan"], 2001: ["Emily", "Madison", "Hannah", "Ashley", "Alexis", "Jacob", "Michael", "Matthew", "Joshua", "Christopher"], 2000: ["Emily", "Hannah", "Madison", "Ashley", "Sarah", "Jacob", "Michael", "Matthew", "Joshua", "Christopher"], 1999: ["Emily", "Hannah", "Alexis", "Sarah", "Samantha", "Jacob", "Michael", "Matthew", "Joshua", "Nicholas"], 1998: ["Emily", "Hannah", "Samantha", "Sarah", "Ashley", "Michael", "Jacob", "Matthew", "Joshua", "Christopher"], 1997: ["Emily", "Jessica", "Ashley", "Sarah", "Hannah", "Michael", "Jacob", "Matthew", "Christopher", "Joshua"], 1996: ["Emily", "Jessica", "Ashley", "Sarah", "Samantha", "Michael", "Matthew", "Jacob", "Christopher", "Joshua"], 1995: ["Jessica", "Ashley", "Emily", "Samantha", "Sarah", "Michael", "Matthew", "Christopher", "Jacob", "Joshua"], 1994: ["Jessica", "Ashley", "Emily", "Samantha", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "Tyler"], 1993: ["Jessica", "Ashley", "Sarah", "Samantha", "Emily", "Michael", "Christopher", "Matthew", "Joshua", "Tyler"], 1992: ["Ashley", "Jessica", "Amanda", "Brittany", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "Andrew"], 1991: ["Ashley", "Jessica", "Brittany", "Amanda", "Samantha", "Michael", "Christopher", "Matthew", "Joshua", "Andrew"], 1990: ["Jessica", "Ashley", "Brittany", "Amanda", "Samantha", "Michael", "Christopher", "Matthew", "Joshua", "Daniel"], 1989: ["Jessica", "Ashley", "Brittany", "Amanda", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "David"], 1988: ["Jessica", "Ashley", "Amanda", "Sarah", "Jennifer", "Michael", "Christopher", "Matthew", "Joshua", "Andrew"], 1987: ["Jessica", "Ashley", "Amanda", "Jennifer", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "David"], 1986: ["Jessica", "Ashley", "Amanda", "Jennifer", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "David"], 1985: ["Jessica", "Ashley", "Jennifer", "Amanda", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "Daniel"], 1984: ["Jennifer", "Jessica", "Ashley", "Amanda", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "David"], 1983: ["Jennifer", "Jessica", "Amanda", "Ashley", "Sarah", "Michael", "Christopher", "Matthew", "David", "Joshua"], 1982: ["Jennifer", "Jessica", "Amanda", "Sarah", "Melissa", "Michael", "Christopher", "Matthew", "Jason", "David"], 1981: ["Jennifer", "Jessica", "Amanda", "Sarah", "Melissa", "Michael", "Christopher", "Matthew", "Jason", "David"], 1980: ["Jennifer", "Amanda", "Jessica", "Melissa", "Sarah", "Michael", "Christopher", "Jason", "David", "James"], 1979: ["Jennifer", "Melissa", "Amanda", "Jessica", "Amy", "Michael", "Christopher", "Jason", "David", "James"], 1978: ["Jennifer", "Melissa", "Jessica", "Amy", "Heather", "Michael", "Jason", "Christopher", "David", "James"], 1977: ["Jennifer", "Melissa", "Amy", "Jessica", "Heather", "Michael", "Jason", "Christopher", "David", "James"], 1976: ["Jennifer", "Amy", "Melissa", "Heather", "Angela", "Michael", "Jason", "Christopher", "David", "James"], 1975: ["Jennifer", "Amy", "Heather", "Melissa", "Angela", "Michael", "Jason", "Christopher", "James", "David"], 1974: ["Jennifer", "Amy", "Michelle", "Heather", "Angela", "Michael", "Jason", "Christopher", "David", "James"], 1973: ["Jennifer", "Amy", "Michelle", "Kimberly", "Lisa", "Michael", "Christopher", "Jason", "James", "David"], 1972: ["Jennifer", "Michelle", "Lisa", "Kimberly", "Amy", "Michael", "Christopher", "James", "David", "John"], 1971: ["Jennifer", "Michelle", "Lisa", "Kimberly", "Amy", "Michael", "James", "David", "John", "Robert"], 1970: ["Jennifer", "Lisa", "Kimberly", "Michelle", "Amy", "Michael", "James", "David", "John", "Robert"], 1969: ["Lisa", "Michelle", "Jennifer", "Kimberly", "Melissa", "Michael", "David", "James", "John", "Robert"], 1968: ["Lisa", "Michelle", "Kimberly", "Jennifer", "Melissa", "Michael", "David", "John", "James", "Robert"], 1967: ["Lisa", "Kimberly", "Michelle", "Mary", "Susan", "Michael", "David", "James", "John", "Robert"], 1966: ["Lisa", "Kimberly", "Mary", "Michelle", "Karen", "Michael", "David", "James", "John", "Robert"], 1965: ["Lisa", "Mary", "Karen", "Kimberly", "Susan", "Michael", "John", "David", "James", "Robert"], 1964: ["Lisa", "Mary", "Susan", "Karen", "Patricia", "Michael", "John", "David", "James", "Robert"], 1963: ["Lisa", "Mary", "Susan", "Karen", "Linda", "Michael", "John", "David", "James", "Robert"], 1962: ["Lisa", "Mary", "Susan", "Karen", "Linda", "Michael", "David", "John", "James", "Robert"], 1961: ["Mary", "Lisa", "Susan", "Linda", "Karen", "Michael", "David", "John", "James", "Robert"], 1960: ["Mary", "Susan", "Linda", "Karen", "Donna", "David", "Michael", "James", "John", "Robert"], 1959: ["Mary", "Susan", "Linda", "Karen", "Donna", "Michael", "David", "James", "John", "Robert"], 1958: ["Mary", "Susan", "Linda", "Karen", "Patricia", "Michael", "David", "James", "Robert", "John"], 1957: ["Mary", "Susan", "Linda", "Debra", "Karen", "Michael", "James", "David", "Robert", "John"], 1956: ["Mary", "Debra", "Linda", "Deborah", "Susan", "Michael", "James", "Robert", "David", "John"], 1955: ["Mary", "Deborah", "Linda", "Debra", "Susan", "Michael", "David", "James", "Robert", "John"], 1954: ["Mary", "Linda", "Deborah", "Patricia", "Susan", "Michael", "James", "Robert", "John", "David"], 1953: ["Mary", "Linda", "Deborah", "Patricia", "Susan", "Robert", "James", "Michael", "John", "David"], 1952: ["Linda", "Mary", "Patricia", "Deborah", "Susan", "James", "Robert", "John", "Michael", "David"], 1951: ["Linda", "Mary", "Patricia", "Deborah", "Barbara", "James", "Robert", "John", "Michael", "David"], 1950: ["Linda", "Mary", "Patricia", "Barbara", "Susan", "James", "Robert", "John", "Michael", "David"], 1949: ["Linda", "Mary", "Patricia", "Barbara", "Susan", "James", "Robert", "John", "William", "Michael"], 1948: ["Linda", "Mary", "Barbara", "Patricia", "Susan", "James", "Robert", "John", "William", "David"], 1947: ["Linda", "Mary", "Patricia", "Barbara", "Sandra", "James", "Robert", "John", "William", "Richard"], 1946: ["Mary", "Linda", "Patricia", "Barbara", "Carol", "James", "Robert", "John", "William", "Richard"], 1945: ["Mary", "Linda", "Barbara", "Patricia", "Carol", "James", "Robert", "John", "William", "Richard"], 1944: ["Mary", "Barbara", "Linda", "Patricia", "Carol", "James", "Robert", "John", "William", "Richard"], 1943: ["Mary", "Barbara", "Patricia", "Linda", "Carol", "James", "Robert", "John", "William", "Richard"], 1942: ["Mary", "Barbara", "Patricia", "Linda", "Carol", "James", "Robert", "John", "William", "Richard"], 1941: ["Mary", "Barbara", "Patricia", "Carol", "Linda", "James", "Robert", "John", "William", "Richard"], 1940: ["Mary", "Barbara", "Patricia", "Judith", "Betty", "James", "Robert", "John", "William", "Richard"], 1939: ["Mary", "Barbara", "Patricia", "Betty", "Shirley", "Robert", "James", "John", "William", "Richard"], 1938: ["Mary", "Barbara", "Patricia", "Betty", "Shirley", "Robert", "James", "John", "William", "Richard"], 1937: ["Mary", "Barbara", "Patricia", "Shirley", "Betty", "Robert", "James", "John", "William", "Richard"], 1936: ["Mary", "Shirley", "Barbara", "Betty", "Patricia", "Robert", "James", "John", "William", "Richard"], 1935: ["Mary", "Shirley", "Barbara", "Betty", "Patricia", "Robert", "James", "John", "William", "Richard"], 1934: ["Mary", "Betty", "Barbara", "Shirley", "Dorothy", "Robert", "James", "John", "William", "Richard"], 1933: ["Mary", "Betty", "Barbara", "Dorothy", "Joan", "Robert", "James", "John", "William", "Richard"], 1932: ["Mary", "Betty", "Barbara", "Dorothy", "Joan", "Robert", "James", "John", "William", "Richard"], 1931: ["Mary", "Betty", "Dorothy", "Barbara", "Joan", "Robert", "James", "John", "William", "Richard"], 1930: ["Mary", "Betty", "Dorothy", "Helen", "Margaret", "Robert", "James", "John", "William", "Richard"], 1929: ["Mary", "Betty", "Dorothy", "Helen", "Margaret", "Robert", "James", "John", "William", "Charles"], 1928: ["Mary", "Betty", "Dorothy", "Helen", "Margaret", "Robert", "John", "James", "William", "Charles"], 1927: ["Mary", "Dorothy", "Betty", "Helen", "Margaret", "Robert", "John", "James", "William", "Charles"], 1926: ["Mary", "Dorothy", "Betty", "Helen", "Margaret", "Robert", "John", "James", "William", "Charles"], 1925: ["Mary", "Dorothy", "Betty", "Helen", "Margaret", "Robert", "John", "William", "James", "Charles"], 1924: ["Mary", "Dorothy", "Helen", "Betty", "Margaret", "Robert", "John", "William", "James", "Charles"], 1923: ["Mary", "Dorothy", "Helen", "Margaret", "Betty", "John", "Robert", "William", "James", "Charles"], 1922: ["Mary", "Dorothy", "Helen", "Margaret", "Ruth", "John", "Robert", "William", "James", "Charles"], 1921: ["Mary", "Dorothy", "Helen", "Margaret", "Ruth", "John", "Robert", "William", "James", "Charles"], 1920: ["Mary", "Dorothy", "Helen", "Margaret", "Ruth", "John", "William", "Robert", "James", "Charles"], 1919: ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"], 1918: ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"] }
 
 window.onload = function windowLoad() {
-    resetGame();
+    // resetGame();
 };
 
 document.addEventListener("keyup", (event) => {
@@ -22,9 +21,9 @@ document.addEventListener("keyup", (event) => {
             playAgain();
         }
     } else {
-        if (theGameIsActive) {
-            respondToKeyUp();
-        }
+        // if (theGameIsActive) {
+        respondToKeyUp();
+        // }
     }
 });
 
@@ -32,7 +31,9 @@ if (window.matchMedia("(max-width: 670px)").matches) {
     alert("If your keyboard is not showing on screen, simply click where it says 'The name to guess' to bring up the keyboard.");
 };
 
-let gameObject = {
+var gameObject = {
+    oneHundredYearsOfNamesObject: { 2017: ["Emma", "Olivia", "Ava", "Isabella", "Sophia", "Liam", "Noah", "William", "James", "Logan"], 2016: ["Emma", "Olivia", "Ava", "Sophia", "Isabella", "Noah", "Liam", "William", "Mason", "James"], 2015: ["Emma", "Olivia", "Sophia", "Ava", "Isabella", "Noah", "Liam", "Mason", "Jacob", "William"], 2014: ["Emma", "Olivia", "Sophia", "Isabella", "Ava", "Noah", "Liam", "Mason", "Jacob", "William"], 2013: ["Sophia", "Emma", "Olivia", "Isabella", "Ava", "Noah", "Jacob", "Liam", "Mason", "William"], 2012: ["Sophia", "Emma", "Isabella", "Olivia", "Ava", "Jacob", "Mason", "Ethan", "Noah", "William"], 2011: ["Sophia", "Isabella", "Emma", "Olivia", "Ava", "Jacob", "Mason", "William", "Jayden", "Noah"], 2010: ["Isabella", "Sophia", "Emma", "Olivia", "Ava", "Jacob", "Ethan", "Michael", "Jayden", "William"], 2009: ["Isabella", "Emma", "Olivia", "Sophia", "Ava", "Jacob", "Ethan", "Michael", "Alexander", "William"], 2008: ["Emma", "Isabella", "Emily", "Olivia", "Ava", "Jacob", "Michael", "Ethan", "Joshua", "Daniel"], 2007: ["Emily", "Isabella", "Emma", "Ava", "Madison", "Jacob", "Michael", "Ethan", "Joshua", "Daniel"], 2006: ["Emily", "Emma", "Madison", "Isabella", "Ava", "Jacob", "Michael", "Joshua", "Ethan", "Matthew"], 2005: ["Emily", "Emma", "Madison", "Abigail", "Olivia", "Jacob", "Michael", "Joshua", "Matthew", "Ethan"], 2004: ["Emily", "Emma", "Madison", "Olivia", "Hannah", "Jacob", "Michael", "Joshua", "Matthew", "Ethan"], 2003: ["Emily", "Emma", "Madison", "Hannah", "Olivia", "Jacob", "Michael", "Joshua", "Matthew", "Andrew"], 2002: ["Emily", "Madison", "Hannah", "Emma", "Alexis", "Jacob", "Michael", "Joshua", "Matthew", "Ethan"], 2001: ["Emily", "Madison", "Hannah", "Ashley", "Alexis", "Jacob", "Michael", "Matthew", "Joshua", "Christopher"], 2000: ["Emily", "Hannah", "Madison", "Ashley", "Sarah", "Jacob", "Michael", "Matthew", "Joshua", "Christopher"], 1999: ["Emily", "Hannah", "Alexis", "Sarah", "Samantha", "Jacob", "Michael", "Matthew", "Joshua", "Nicholas"], 1998: ["Emily", "Hannah", "Samantha", "Sarah", "Ashley", "Michael", "Jacob", "Matthew", "Joshua", "Christopher"], 1997: ["Emily", "Jessica", "Ashley", "Sarah", "Hannah", "Michael", "Jacob", "Matthew", "Christopher", "Joshua"], 1996: ["Emily", "Jessica", "Ashley", "Sarah", "Samantha", "Michael", "Matthew", "Jacob", "Christopher", "Joshua"], 1995: ["Jessica", "Ashley", "Emily", "Samantha", "Sarah", "Michael", "Matthew", "Christopher", "Jacob", "Joshua"], 1994: ["Jessica", "Ashley", "Emily", "Samantha", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "Tyler"], 1993: ["Jessica", "Ashley", "Sarah", "Samantha", "Emily", "Michael", "Christopher", "Matthew", "Joshua", "Tyler"], 1992: ["Ashley", "Jessica", "Amanda", "Brittany", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "Andrew"], 1991: ["Ashley", "Jessica", "Brittany", "Amanda", "Samantha", "Michael", "Christopher", "Matthew", "Joshua", "Andrew"], 1990: ["Jessica", "Ashley", "Brittany", "Amanda", "Samantha", "Michael", "Christopher", "Matthew", "Joshua", "Daniel"], 1989: ["Jessica", "Ashley", "Brittany", "Amanda", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "David"], 1988: ["Jessica", "Ashley", "Amanda", "Sarah", "Jennifer", "Michael", "Christopher", "Matthew", "Joshua", "Andrew"], 1987: ["Jessica", "Ashley", "Amanda", "Jennifer", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "David"], 1986: ["Jessica", "Ashley", "Amanda", "Jennifer", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "David"], 1985: ["Jessica", "Ashley", "Jennifer", "Amanda", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "Daniel"], 1984: ["Jennifer", "Jessica", "Ashley", "Amanda", "Sarah", "Michael", "Christopher", "Matthew", "Joshua", "David"], 1983: ["Jennifer", "Jessica", "Amanda", "Ashley", "Sarah", "Michael", "Christopher", "Matthew", "David", "Joshua"], 1982: ["Jennifer", "Jessica", "Amanda", "Sarah", "Melissa", "Michael", "Christopher", "Matthew", "Jason", "David"], 1981: ["Jennifer", "Jessica", "Amanda", "Sarah", "Melissa", "Michael", "Christopher", "Matthew", "Jason", "David"], 1980: ["Jennifer", "Amanda", "Jessica", "Melissa", "Sarah", "Michael", "Christopher", "Jason", "David", "James"], 1979: ["Jennifer", "Melissa", "Amanda", "Jessica", "Amy", "Michael", "Christopher", "Jason", "David", "James"], 1978: ["Jennifer", "Melissa", "Jessica", "Amy", "Heather", "Michael", "Jason", "Christopher", "David", "James"], 1977: ["Jennifer", "Melissa", "Amy", "Jessica", "Heather", "Michael", "Jason", "Christopher", "David", "James"], 1976: ["Jennifer", "Amy", "Melissa", "Heather", "Angela", "Michael", "Jason", "Christopher", "David", "James"], 1975: ["Jennifer", "Amy", "Heather", "Melissa", "Angela", "Michael", "Jason", "Christopher", "James", "David"], 1974: ["Jennifer", "Amy", "Michelle", "Heather", "Angela", "Michael", "Jason", "Christopher", "David", "James"], 1973: ["Jennifer", "Amy", "Michelle", "Kimberly", "Lisa", "Michael", "Christopher", "Jason", "James", "David"], 1972: ["Jennifer", "Michelle", "Lisa", "Kimberly", "Amy", "Michael", "Christopher", "James", "David", "John"], 1971: ["Jennifer", "Michelle", "Lisa", "Kimberly", "Amy", "Michael", "James", "David", "John", "Robert"], 1970: ["Jennifer", "Lisa", "Kimberly", "Michelle", "Amy", "Michael", "James", "David", "John", "Robert"], 1969: ["Lisa", "Michelle", "Jennifer", "Kimberly", "Melissa", "Michael", "David", "James", "John", "Robert"], 1968: ["Lisa", "Michelle", "Kimberly", "Jennifer", "Melissa", "Michael", "David", "John", "James", "Robert"], 1967: ["Lisa", "Kimberly", "Michelle", "Mary", "Susan", "Michael", "David", "James", "John", "Robert"], 1966: ["Lisa", "Kimberly", "Mary", "Michelle", "Karen", "Michael", "David", "James", "John", "Robert"], 1965: ["Lisa", "Mary", "Karen", "Kimberly", "Susan", "Michael", "John", "David", "James", "Robert"], 1964: ["Lisa", "Mary", "Susan", "Karen", "Patricia", "Michael", "John", "David", "James", "Robert"], 1963: ["Lisa", "Mary", "Susan", "Karen", "Linda", "Michael", "John", "David", "James", "Robert"], 1962: ["Lisa", "Mary", "Susan", "Karen", "Linda", "Michael", "David", "John", "James", "Robert"], 1961: ["Mary", "Lisa", "Susan", "Linda", "Karen", "Michael", "David", "John", "James", "Robert"], 1960: ["Mary", "Susan", "Linda", "Karen", "Donna", "David", "Michael", "James", "John", "Robert"], 1959: ["Mary", "Susan", "Linda", "Karen", "Donna", "Michael", "David", "James", "John", "Robert"], 1958: ["Mary", "Susan", "Linda", "Karen", "Patricia", "Michael", "David", "James", "Robert", "John"], 1957: ["Mary", "Susan", "Linda", "Debra", "Karen", "Michael", "James", "David", "Robert", "John"], 1956: ["Mary", "Debra", "Linda", "Deborah", "Susan", "Michael", "James", "Robert", "David", "John"], 1955: ["Mary", "Deborah", "Linda", "Debra", "Susan", "Michael", "David", "James", "Robert", "John"], 1954: ["Mary", "Linda", "Deborah", "Patricia", "Susan", "Michael", "James", "Robert", "John", "David"], 1953: ["Mary", "Linda", "Deborah", "Patricia", "Susan", "Robert", "James", "Michael", "John", "David"], 1952: ["Linda", "Mary", "Patricia", "Deborah", "Susan", "James", "Robert", "John", "Michael", "David"], 1951: ["Linda", "Mary", "Patricia", "Deborah", "Barbara", "James", "Robert", "John", "Michael", "David"], 1950: ["Linda", "Mary", "Patricia", "Barbara", "Susan", "James", "Robert", "John", "Michael", "David"], 1949: ["Linda", "Mary", "Patricia", "Barbara", "Susan", "James", "Robert", "John", "William", "Michael"], 1948: ["Linda", "Mary", "Barbara", "Patricia", "Susan", "James", "Robert", "John", "William", "David"], 1947: ["Linda", "Mary", "Patricia", "Barbara", "Sandra", "James", "Robert", "John", "William", "Richard"], 1946: ["Mary", "Linda", "Patricia", "Barbara", "Carol", "James", "Robert", "John", "William", "Richard"], 1945: ["Mary", "Linda", "Barbara", "Patricia", "Carol", "James", "Robert", "John", "William", "Richard"], 1944: ["Mary", "Barbara", "Linda", "Patricia", "Carol", "James", "Robert", "John", "William", "Richard"], 1943: ["Mary", "Barbara", "Patricia", "Linda", "Carol", "James", "Robert", "John", "William", "Richard"], 1942: ["Mary", "Barbara", "Patricia", "Linda", "Carol", "James", "Robert", "John", "William", "Richard"], 1941: ["Mary", "Barbara", "Patricia", "Carol", "Linda", "James", "Robert", "John", "William", "Richard"], 1940: ["Mary", "Barbara", "Patricia", "Judith", "Betty", "James", "Robert", "John", "William", "Richard"], 1939: ["Mary", "Barbara", "Patricia", "Betty", "Shirley", "Robert", "James", "John", "William", "Richard"], 1938: ["Mary", "Barbara", "Patricia", "Betty", "Shirley", "Robert", "James", "John", "William", "Richard"], 1937: ["Mary", "Barbara", "Patricia", "Shirley", "Betty", "Robert", "James", "John", "William", "Richard"], 1936: ["Mary", "Shirley", "Barbara", "Betty", "Patricia", "Robert", "James", "John", "William", "Richard"], 1935: ["Mary", "Shirley", "Barbara", "Betty", "Patricia", "Robert", "James", "John", "William", "Richard"], 1934: ["Mary", "Betty", "Barbara", "Shirley", "Dorothy", "Robert", "James", "John", "William", "Richard"], 1933: ["Mary", "Betty", "Barbara", "Dorothy", "Joan", "Robert", "James", "John", "William", "Richard"], 1932: ["Mary", "Betty", "Barbara", "Dorothy", "Joan", "Robert", "James", "John", "William", "Richard"], 1931: ["Mary", "Betty", "Dorothy", "Barbara", "Joan", "Robert", "James", "John", "William", "Richard"], 1930: ["Mary", "Betty", "Dorothy", "Helen", "Margaret", "Robert", "James", "John", "William", "Richard"], 1929: ["Mary", "Betty", "Dorothy", "Helen", "Margaret", "Robert", "James", "John", "William", "Charles"], 1928: ["Mary", "Betty", "Dorothy", "Helen", "Margaret", "Robert", "John", "James", "William", "Charles"], 1927: ["Mary", "Dorothy", "Betty", "Helen", "Margaret", "Robert", "John", "James", "William", "Charles"], 1926: ["Mary", "Dorothy", "Betty", "Helen", "Margaret", "Robert", "John", "James", "William", "Charles"], 1925: ["Mary", "Dorothy", "Betty", "Helen", "Margaret", "Robert", "John", "William", "James", "Charles"], 1924: ["Mary", "Dorothy", "Helen", "Betty", "Margaret", "Robert", "John", "William", "James", "Charles"], 1923: ["Mary", "Dorothy", "Helen", "Margaret", "Betty", "John", "Robert", "William", "James", "Charles"], 1922: ["Mary", "Dorothy", "Helen", "Margaret", "Ruth", "John", "Robert", "William", "James", "Charles"], 1921: ["Mary", "Dorothy", "Helen", "Margaret", "Ruth", "John", "Robert", "William", "James", "Charles"], 1920: ["Mary", "Dorothy", "Helen", "Margaret", "Ruth", "John", "William", "Robert", "James", "Charles"], 1919: ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"], 1918: ["Mary", "Helen", "Dorothy", "Margaret", "Ruth", "John", "William", "James", "Robert", "Charles"] },
+
     // the following starts gameplay in motion by asking for a year
     theYearDisplay: Number(prompt("Please enter any year from 1918 to 2017 and guess the most popular names for that year:")),
     checkTheYear: function() {
@@ -49,10 +50,11 @@ let gameObject = {
         }
     },
 
-    theShortPageBackground: ["assets/images/" + theYearDisplay + ".jpg"],
-    thePageBackground: "<img src=\"assets/images/" + theYearDisplay + ".jpg\" class=\"theBackgroundImage\" alt=\"newspaper front page\">",
-    allWordsReset: [...oneHundredYearsOfNamesObject[theYearDisplay]],
-    allWordsToGuess: [...allWordsReset],
+    theShortPageBackground: ["assets/images/" + this.theYearDisplay + ".jpg"],
+    thePageBackground: "<img src=\"assets/images/" + this.theYearDisplay + ".jpg\" class=\"theBackgroundImage\" alt=\"newspaper front page\">",
+    theYearWeNeed: this.theYearDisplay,
+    allWordsReset: this.oneHundredYearsOfNamesObject[this.theYearWeNeed[0]],
+    allWordsToGuess: [...this.allWordsReset],
     theWordToGuess: "",
     allTheValidGuesses: "abcdefghijklmnopqrstuvwxyz",
     theWins: 0,
@@ -62,7 +64,7 @@ let gameObject = {
     theLettersGuessedArray: [],
     theWordToGuessArray: [],
     theLettersThatMatchArray: [],
-    randomMax: allWordsToGuess.length - 1, //minus 1 to make it zero-based
+    randomMax: this.allWordsToGuess.length - 1, //minus 1 to make it zero-based
     randomMin: 0,
     theMessage: "",
     theKeyName: "",
@@ -74,20 +76,20 @@ let gameObject = {
 
     getDifficulty: function() { // check the radio buttons and update the difficulty level. The (word length + difficulty level) = the number of guesses the user gets.
         if (document.getElementById("easyDifficulty").checked) {
-            theDifficultyLevel = 4;
+            this.theDifficultyLevel = 4;
         } else {
             if (document.getElementById("standardDifficulty").checked) {
-                theDifficultyLevel = 2;
+                this.theDifficultyLevel = 2;
             } else {
-                theDifficultyLevel = -1;
+                this.theDifficultyLevel = -1;
             }
         }
         updateGuessesRemaining();
     },
 
     makeGameNotActive: function() {
-        theGameIsActive = false;
-        if (allWordsToGuess.length === 0) { // if there are no more names to guess
+        this.theGameIsActive = false;
+        if (this.allWordsToGuess.length === 0) { // if there are no more names to guess
             setFocus("startNewGame");
         } else {
             setFocus("playAgain");
@@ -122,19 +124,19 @@ let gameObject = {
     },
 
     resetGame: function() { // full reset
-        const allWordsToGuess = [...allWordsReset];
-        theWins = 0;
-        theWordsGuessedArray = [];
+        const allWordsToGuess = [...this.allWordsReset];
+        this.theWins = 0;
+        this.theWordsGuessedArray = [];
 
-        theLettersThatMatchArray = [];
-        theLettersGuessedArray = [];
+        this.theLettersThatMatchArray = [];
+        this.theLettersGuessedArray = [];
         playAgain();
     },
 
     playAgain: function() { // partial reset - this allows all ten names for a year to be guessed
         setFocus("hiddenTextField");
-        theLettersThatMatchArray = [];
-        theLettersGuessedArray = [];
+        this.theLettersThatMatchArray = [];
+        this.theLettersGuessedArray = [];
         playGame();
     },
 
@@ -143,7 +145,7 @@ let gameObject = {
     },
 
     showBackgroundImage: function() { // shows the year's newspaper jpg in a new window without the opacity reduction used in gameplay
-        window.open(theShortPageBackground);
+        window.open(this.theShortPageBackground);
         setFocus("hiddenTextField");
     },
 
@@ -152,46 +154,46 @@ let gameObject = {
     },
 
     updateAllDisplays: function() {
-        updateDisplay("theHeadline", "<em>Guess the Top Baby Names of " + theYearDisplay + "</em>");
+        updateDisplay("theHeadline", "<em>Guess the Top Baby Names of " + this.theYearDisplay + "</em>");
         updateDisplay("displayArea", "&nbsp;");
-        updateDisplay("theWins", "Rounds won: " + theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
+        updateDisplay("theWins", "Rounds won: " + this.theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
         updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
         updateGuessesRemaining();
         updateTopFiveDisplays();
     },
 
     updateDisplaysExceptDisplayAndRemaining: function() { // used when gameplay finishes and user wins or loses round
-        updateDisplay("theHeadline", "<em>Guess the Top Baby Names of " + theYearDisplay + "</em>");
-        updateDisplay("theWins", "Rounds won: " + theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
+        updateDisplay("theHeadline", "<em>Guess the Top Baby Names of " + this.theYearDisplay + "</em>");
+        updateDisplay("theWins", "Rounds won: " + this.theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
         updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
         updateTopFiveDisplays();
     },
 
     updateTopFiveDisplays: function() { // updates the top-five girls and the top-five boys names, correctly ranking each name for the year when the word is guessed or the round is lost
-        theIndex = (allWordsReset.indexOf(theWordToGuess));
-        if (0 <= theIndex) {
-            if (theIndex <= 4) {
-                theTopFiveGirlNamesArray.splice(theIndex, 1, (theIndex + 1) + ": " + theWordToGuess);
+        this.theIndex = (this.allWordsReset.indexOf(this.theWordToGuess));
+        if (0 <= this.theIndex) {
+            if (this.theIndex <= 4) {
+                theTopFiveGirlNamesArray.splice(this.theIndex, 1, (this.theIndex + 1) + ": " + this.theWordToGuess);
             } else {
-                theTopFiveBoyNamesArray.splice(theIndex - 5, 1, (theIndex - 4) + ": " + theWordToGuess);
+                theTopFiveBoyNamesArray.splice(this.theIndex - 5, 1, (this.theIndex - 4) + ": " + this.theWordToGuess);
             }
         }
-        updateDisplay("theTopFiveGirlNames", "Top Five Girl Names of " + theYearDisplay + "<br><ul><li>" + theTopFiveGirlNamesArray.join("</li><li>") + "</li></ul>"); // auto-magically makes unordered lists
-        updateDisplay("theTopFiveBoyNames", "Top Five Boy Names of " + theYearDisplay + "<br><ul><li>" + theTopFiveBoyNamesArray.join("</li><li>") + "</li></ul>");
+        updateDisplay("theTopFiveGirlNames", "Top Five Girl Names of " + this.theYearDisplay + "<br><ul><li>" + this.theTopFiveGirlNamesArray.join("</li><li>") + "</li></ul>"); // auto-magically makes unordered lists
+        updateDisplay("theTopFiveBoyNames", "Top Five Boy Names of " + this.theYearDisplay + "<br><ul><li>" + this.theTopFiveBoyNamesArray.join("</li><li>") + "</li></ul>");
     },
 
     updateGuessesRemaining: function() {
-        theGuessesRemaining = theWordToGuess.length + theDifficultyLevel;
-        updateDisplay("theGuessesRemaining", "<strong>Guesses remaining: </strong>" + theGuessesRemaining);
+        this.theGuessesRemaining = this.theWordToGuess.length + this.theDifficultyLevel;
+        updateDisplay("theGuessesRemaining", "<strong>Guesses remaining: </strong>" + this.theGuessesRemaining);
     },
 
     updateTheWordToGuessAndGuesses: function() {
         if (window.matchMedia("(max-width: 670px)").matches) {
-            updateDisplay("displayArea", "<p>The name to guess:</p>" + theLettersThatMatchArray.join(" "));
-            updateDisplay("theLettersGuessed", "<p>Letters guessed:</p>" + theLettersGuessedArray.join(" "));
+            updateDisplay("displayArea", "<p>The name to guess:</p>" + this.theLettersThatMatchArray.join(" "));
+            updateDisplay("theLettersGuessed", "<p>Letters guessed:</p>" + this.theLettersGuessedArray.join(" "));
         } else {
-            updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
-            updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
+            updateDisplay("displayArea", "The name to guess: " + this.theLettersThatMatchArray.join(" "));
+            updateDisplay("theLettersGuessed", "Letters guessed: " + this.theLettersGuessedArray.join(" "));
         }
     },
 

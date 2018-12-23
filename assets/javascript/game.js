@@ -137,9 +137,9 @@ function updateDisplay(theID, theMessage) {
 
 function updateAllDisplays() {
     updateDisplay("theHeadline", "<em>Guess the Top Baby Names of " + theYearDisplay + "</em>");
-    updateDisplay("displayArea", "&nbsp;");
     updateDisplay("theWins", "Rounds won: " + theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
-    updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
+    updateTheWordToGuess();
+    updateTheLettersGuessed();
     updateGuessesRemaining();
     updateTopFiveDisplays();
 }
@@ -147,7 +147,6 @@ function updateAllDisplays() {
 function updateDisplaysExceptDisplayAndRemaining() { // used when gameplay finishes and user wins or loses round
     updateDisplay("theHeadline", "<em>Guess the Top Baby Names of " + theYearDisplay + "</em>");
     updateDisplay("theWins", "Rounds won: " + theWins + " out of " + (10 - allWordsToGuess.length) + " rounds played");
-    updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
     updateTopFiveDisplays();
 }
 
@@ -169,13 +168,19 @@ function updateGuessesRemaining() {
     updateDisplay("theGuessesRemaining", "<strong>Guesses remaining: </strong>" + theGuessesRemaining);
 }
 
-function updateTheWordToGuessAndGuesses() {
+function updateTheWordToGuess() {
     if (window.matchMedia("(max-width: 670px)").matches) {
         updateDisplay("displayArea", "<p>The name to guess:</p>" + theLettersThatMatchArray.join(" "));
+    } else {
+        updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
+    }
+}
+
+function updateTheLettersGuessed() {
+    if (window.matchMedia("(max-width: 670px)").matches) {
         updateDisplay("theLettersGuessed", "<p>Letters guessed:</p>" + theLettersGuessedArray.join(" "));
     } else {
         updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
-        updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
     }
 }
 
@@ -268,7 +273,8 @@ function playGame() { // this does some initializing, gets the corresponding-yea
         }
     }
     console.log(theWordToGuess); // peek there if you want to cheat!
-    updateTheWordToGuessAndGuesses();
+    updateTheWordToGuess();
+    updateTheLettersGuessed();
     setFocus("hiddenTextField");
 }
 
@@ -280,7 +286,7 @@ function respondToKeyUp() {
         } else { // put the letter in place of an underscore in theLettersGuessedArray
             if (theWordToGuess.toLowerCase().includes(theKeyName.toLowerCase())) {
                 theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 0, theKeyName.toLowerCase());
-                updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
+                updateTheLettersGuessed();
                 // get the letter in the right place (observing capitals) and redo the word-to-guess display
                 for (i = 0; i < theWordToGuess.length; i++) {
                     // if theKeyName is in theWordToGuessArray position[i] then splice
@@ -291,7 +297,8 @@ function respondToKeyUp() {
                         } else {
                             theLettersThatMatchArray.splice(i, 1, theKeyName.toUpperCase());
                         }
-                        updateDisplay("displayArea", "The name to guess: " + theLettersThatMatchArray.join(" "));
+                        updateTheWordToGuess();
+                        updateTheLettersGuessed();
                     }
                 }
                 // then see if the word has been completed
@@ -312,10 +319,9 @@ function respondToKeyUp() {
                 //if the guess is wrong then we decrement the guesses remaining
             } else {
                 theLettersGuessedArray.splice(theLettersGuessedArray.indexOf('_'), 1, theKeyName.toLowerCase());
-                updateDisplay("theLettersGuessed", "Letters guessed: " + theLettersGuessedArray.join(" "));
+                updateTheLettersGuessed();
                 theGuessesRemaining = theGuessesRemaining - 1;
-                theMessage = "Guesses remaining: " + theGuessesRemaining;
-                document.getElementById("theGuessesRemaining").innerHTML = theMessage;
+                updateGuessesRemaining();
                 if (theGuessesRemaining !== 0) { // this If is here because audioContext on Safari on iOS causes game to not get past shortBuzzBeep and on to the next If.
                     shortBuzzBeep();
                 }
