@@ -78,7 +78,6 @@ function makeGameNotActive() {
     }
     return;
 }
-document.setAttribute("autocomplete", "off"); // fixes a problem in, at least, Android browsers
 document.addEventListener("keyup", (event) => {
     theKeyName = event.key;
     if (event.key === "Enter") {
