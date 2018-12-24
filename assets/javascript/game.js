@@ -80,15 +80,7 @@ function makeGameNotActive() {
 }
 document.addEventListener("keyup", (event) => {
     theKeyName = event.key;
-    if (event.key === "Enter") {
-        if (document.activeElement !== document.getElementById("playAgain")) {
-            playAgain();
-        }
-    } else {
-        if (theGameIsActive) {
-            respondToKeyUp();
-        }
-    }
+    respondToKeyUp();
 });
 
 function setFocus(theID) {
@@ -108,7 +100,6 @@ function resetGame() { // full reset
     const allWordsToGuess = [...allWordsReset];
     theWins = 0;
     theWordsGuessedArray = [];
-
     theLettersThatMatchArray = [];
     theLettersGuessedArray = [];
     playAgain();
@@ -262,12 +253,12 @@ function playGame() { // this does some initializing, gets the corresponding-yea
     }
 
     if (theDifficultyLevel > 0) {
-        for (let count = 0; count < theDifficultyLevel; count++) { // add a couple more underscores for the difficulty level
+        for (let count = 0; count < theDifficultyLevel; count++) { // add a couple more underscores for the difficulty level if it's a positive number
             theLettersGuessedArray.push("_");
         }
     } else {
         theNegativeDifficultyLevel = -theDifficultyLevel;
-        for (let count = 0; count < theNegativeDifficultyLevel; count++) { // remove underscores for the difficulty level
+        for (let count = 0; count < theNegativeDifficultyLevel; count++) { // remove underscores for the difficulty level if it's a negative number
             theLettersGuessedArray.pop();
         }
     }
@@ -279,7 +270,7 @@ function playGame() { // this does some initializing, gets the corresponding-yea
 
 function respondToKeyUp() {
     if (theGuessesRemaining > 0) {
-        // if it is not a letter then we will beep to indicate an error
+        // if it is not a letter then we beep to indicate an error
         if (!allTheValidGuesses.includes(theKeyName.toLowerCase()) || theKeyName.length !== 1 || theLettersGuessedArray.includes(theKeyName.toLowerCase())) {
             buzzBeep();
         } else { // put the letter in place of an underscore in theLettersGuessedArray
