@@ -175,9 +175,7 @@ function updateTheLettersGuessed() {
 
 function makeSound(waveform1, frequency1, start1, stop1) { // this is very basic sound generation but it's very flexible and doesn't require more files
     let context = new(window.AudioContext || window.webkitAudioContext)();
-    let context2 = new(window.AudioContext || window.webkitAudioContext)();
     let oscillator = context.createOscillator();
-    let oscillator2 = context2.createOscillator();
     oscillator.type = waveform1;
     oscillator.frequency.value = frequency1;
     oscillator.connect(context.destination);
